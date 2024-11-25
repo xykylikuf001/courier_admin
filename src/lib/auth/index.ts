@@ -9,7 +9,7 @@ export const checkToken = (token?: string): boolean => {
     try {
         jwtDecode(_token);
         return true;
-    } catch (error) {
+    } catch  {
         return false;
     }
 }

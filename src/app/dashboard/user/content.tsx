@@ -1,20 +1,15 @@
 "use client"
 import {Fragment} from "react";
+import Typography from "@mui/material/Typography";
+import {GridColDef} from "@mui/x-data-grid";
+
 import {UserVisible} from "@/openapi/client";
 import {formatDatetime} from "@/lib/helper";
-import TrueFalseCheck from "@/components/features/TrueFalseCheck";
-import ActionsMenu from "@/components/features/menu/ActionsMenu";
-import EnhancedTable from "@/components/table/EnhancedTable";
 import ViewButton from "@/components/ui/buttons/ViewButton";
+import TrueFalseCheck from "@/components/features/TrueFalseCheck";
+import ServerSideDataGrid from "@/components/table/ServerSideDataGrid";
+import ActionsMenu from "@/components/features/menu/ActionsMenu";
 import AddButton from "@/components/ui/buttons/AddButton";
-
-
-import {usePathname, useRouter, useSearchParams} from "next/navigation";
-import {deleteAction} from "./actions";
-import ReUsableButton from "@/components/ui/buttons/ReUsableButton";
-import {MdDelete} from "react-icons/md";
-
-
 
 interface Props {
     rows: UserVisible[];
@@ -23,104 +18,129 @@ interface Props {
 }
 
 
-export default function Content({rows, page, limit}: Props) {
-    const router = useRouter();
-    const searchParams = useSearchParams();
-    const pathname = usePathname();
+export default function Content({rows, limit, page}: Props) {
+    // const columns: GridColDef[] = [
+    //     { field: 'name', headerName: 'Name', width: 150 },
+    //     // { field: 'col2', headerName: 'Column 2', width: 150 },
+    // ];
 
-    const handleChange = async (key: string, value: any) => {
-        const params = new URLSearchParams(searchParams)
-        params.set(key, value);
-        router.replace(`${pathname}?${params.toString()}`);
-    };
+    // const router = useRouter();
+    // const searchParams = useSearchParams();
+    // const pathname = usePathname();
 
-    const columns = [
-        {
-            headerName: "Username",
-            field: "username",
-        },
-        {
-            headerName: "Name",
-            field: "name",
-        },
-        {
-            headerName: "Email",
-            field: "email",
-        },
-        {
-            headerName: "Telegram ID",
-            field: "telegramId",
-        },
-        {
-            headerName: "Telegram name",
-            field: "telegramName",
-        },
-        {
-            headerName: "Pubg name",
-            field: "pubgName",
-        },
-        {
-            headerName: "Age",
-            field: "age",
-        },
+    // const handleChange = async (key: string, value: any) => {
+    //     const params = new URLSearchParams(searchParams)
+    //     params.set(key, value);
+    //     router.replace(`${pathname}?${params.toString()}`);
+    // };
 
+
+    const columns: GridColDef[] = [
         {
-            headerName: "Is staff",
-            field: "isStaff",
-            renderCell: (row: UserVisible) => {
+            field: 'name',
+            headerName: 'Name',
+            flex: 1.5,
+            minWidth: 200
+        },
+        {
+            field: 'email',
+            headerName: 'Email',
+            flex: 1.5,
+            minWidth: 200
+        },
+        {
+            field: 'phone',
+            headerName: 'Phone',
+            flex: 1.5,
+            minWidth: 200
+        },
+        {
+            field: 'phoneVerifiedAt',
+            headerName: 'Phone verified at',
+            flex: 1.5,
+            minWidth: 200,
+            align: 'right',
+            headerAlign: 'right',
+            renderCell: (params) => formatDatetime({date: params.value}),
+        },
+        {
+            field: 'isActive',
+            headerName: 'Is active',
+            flex: 0.5,
+            minWidth: 100,
+            align: 'center',
+            headerAlign: "center",
+            renderCell: (params) => {
                 return <TrueFalseCheck
-                    label={row.isStaff ? "Yes" : "No"} isTrue={row.isStaff}
+                    label={params.row.isActive ? "Yes" : "No"} isTrue={params.row.isActive}
                     falseMessage={"No"}
                     trueMessage={"Yes"}/>
-            }
+            },
         },
         {
-            headerName: "Is active",
-            field: "isActive",
-            renderCell: (row: UserVisible) => {
-                return <TrueFalseCheck
-                    label={row.isActive ? "Yes" : "No"} isTrue={row.isActive}
-                    falseMessage={"No"}
-                    trueMessage={"Yes"}/>
-            }
-        },
-        {
-            headerName: "Created at",
-            field: "createdAt",
-            renderCell: (row: UserVisible) => {
-                return formatDatetime({date: row.createdAt})
-            }
-        },
-        {
-            headerName: "Actions",
-            field: "actions",
-            sortable: false,
-            renderCell: (row: UserVisible) => {
-                const handleDelete = async (callback: (props: {
-                    isError: boolean, message?: string | null
-                }) => Promise<void>) => {
-                    const response = await deleteAction(row.id);
-                    if (response.status === 200) {
-                        await callback({isError: false, message: response.message});
-                        router.refresh();
-                    } else {
-                        await callback({isError: true, message: response.message});
-                    }
-                }
+            field: 'createdAt',
+            headerName: 'Created at',
+            flex: 1,
+            minWidth: 200,
+            align: 'right',
+            headerAlign: 'right',
 
+            renderCell: (params) => formatDatetime({date: params.value}),
+        },
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            width: 100,
+            renderCell: (params) => {
                 return (
-                    <ActionsMenu>
-                        <ViewButton href={`/dashboard/user/${row.id}/detail`}/>
-                        <ReUsableButton
-                            confirmText={"Are you sure?!"}
-                            title="Delete"
-                            type="menuItem"
-                            icon={<MdDelete/>} onClick={handleDelete}/>
+                    <ActionsMenu isMiniButton>
+                        <ViewButton href={`/dashboard/user/${params.row.id}/detail`}/>
                     </ActionsMenu>
                 )
             },
+            sortable: false,
+            filterable: false,
         },
-    ]
+        // {
+        //     field: 'users',
+        //     headerName: 'Users',
+        //     headerAlign: 'right',
+        //     align: 'right',
+        //     flex: 1,
+        //     minWidth: 80,
+        // },
+        // {
+        //     field: 'eventCount',
+        //     headerName: 'Event Count',
+        //     headerAlign: 'right',
+        //     align: 'right',
+        //     flex: 1,
+        //     minWidth: 100,
+        // },
+        // {
+        //     field: 'viewsPerUser',
+        //     headerName: 'Views per User',
+        //     headerAlign: 'right',
+        //     align: 'right',
+        //     flex: 1,
+        //     minWidth: 120,
+        // },
+        // {
+        //     field: 'averageTime',
+        //     headerName: 'Average Time',
+        //     headerAlign: 'right',
+        //     align: 'right',
+        //     flex: 1,
+        //     minWidth: 100,
+        // },
+        // {
+        //     field: 'conversions',
+        //     headerName: 'Daily Conversions',
+        //     flex: 1,
+        //     minWidth: 150,
+        //     renderCell: renderSparklineCell,
+        // },
+    ];
 
 
     const action = (
@@ -131,14 +151,11 @@ export default function Content({rows, page, limit}: Props) {
 
     return (
         <Fragment>
-            <EnhancedTable<UserVisible>
-                title={`Users`}
-                loading={false}
-                currentPage={page - 1}
-                rowsPerPage={limit}
-                columns={columns}
-                rows={rows}
-                action={action}/>
+            <Typography component="h2" variant="h6" sx={{mb: 2}}>
+                Overview
+            </Typography>
+            <ServerSideDataGrid page={page} pageSize={limit} title={"Users"} action={action} columns={columns}
+                                rows={rows}/>
         </Fragment>
     )
 }

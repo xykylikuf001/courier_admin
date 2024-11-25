@@ -6,5 +6,6 @@ export type ProfilePasswordIn = {
     oldPassword: string;
     passwordConfirm: string;
     password: string;
+    code: string;
 };
 

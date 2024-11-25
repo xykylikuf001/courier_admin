@@ -4,4 +4,6 @@
 /* eslint-disable */
 export enum LanguagesChoices {
     EN = 'en',
+    RU = 'ru',
+    TK = 'tk',
 }

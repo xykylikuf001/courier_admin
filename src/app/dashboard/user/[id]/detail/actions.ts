@@ -7,15 +7,14 @@ import {ApiError, UserBase} from "@/openapi/client";
 import {revalidateTag} from 'next/cache'
 import {checkAuthCookies} from "@/lib/auth/actions";
 import {AuthError} from "@/lib/auth/exceptions";
-import {MD_DELAY} from "@/lib/constants";
 
 
 export async function edit(id: string, values: UserBase) {
-    const isAuth = checkAuthCookies();
+    const isAuth = await checkAuthCookies();
     if (!isAuth) {
         throw new AuthError("You must be signed in to perform this action!");
     }
-    const fetchClient = getServerInstance();
+    const fetchClient = await getServerInstance();
     let result;
     try {
         const response = await fetchClient.account.userUpdate(
@@ -39,20 +38,19 @@ export async function edit(id: string, values: UserBase) {
 }
 
 
-export async function retrieveUserWallet(userId: string) {
-    const isAuth = checkAuthCookies();
+
+export async function confirmPhone(id: string) {
+    const isAuth = await checkAuthCookies();
     if (!isAuth) {
         throw new AuthError("You must be signed in to perform this action!");
     }
-    const fetchClient = getServerInstance(
-        {next: {revalidate: MD_DELAY, tags: ["user-wallet"]}, withAuth: true}
-    );
+    const fetchClient = await getServerInstance();
     let result;
     try {
-        const response = await fetchClient.wallet.walletByUser(
-            {userId: userId}
+        const response = await fetchClient.account.userPhoneVerifyManual(
+            {objId: id}
         )
-        result = {status: 200, data: response, errors: null, message: null}
+        result = {status: 200, message: response.message, data: response.data, errors: null}
     } catch (e: any) {
         if (e instanceof ApiError) {
             if (e.status === 422) {
@@ -65,6 +63,34 @@ export async function retrieveUserWallet(userId: string) {
     }
     revalidateTag("user-list");
     revalidateTag("user-detail");
-    revalidateTag("user-wallet");
+
     return result;
 }
+
+export async function getPhoneOtp(phone: string) {
+    const isAuth = await checkAuthCookies();
+    if (!isAuth) {
+        throw new AuthError("You must be signed in to perform this action!");
+    }
+    const fetchClient = await getServerInstance();
+    let result;
+    try {
+        const response = await fetchClient.account.userPhoneVerifyGetCode(
+            {phone: phone}
+        )
+        result = {status: 200, message: response.message, data: response.data, errors: null}
+    } catch (e: any) {
+
+        if (e instanceof ApiError) {
+            if (e.status === 422) {
+                return {status: e.status, message: "Please provide valid data", errors: e.body.detail, data: null}
+            } else {
+                return {status: e.status, message: e.body.detail, errors: null, data: null}
+            }
+        }
+        return {status: 500, errors: null, message: "Something went wrong!", data: null}
+    }
+
+    return result;
+}
+

@@ -3,7 +3,6 @@
 import EnhancedTable from "@/components/table/EnhancedTable";
 import {UserSessionVisible} from "@/openapi/client";
 import {formatDatetime} from "@/lib/helper";
-import {useRouter} from "next/navigation";
 
 interface Props {
     data: UserSessionVisible[];
@@ -11,9 +10,6 @@ interface Props {
 
 
 export default function UserSessions({data}: Props) {
-    const router = useRouter()
-
-
     const columns = [
         {
             headerName: "Id",

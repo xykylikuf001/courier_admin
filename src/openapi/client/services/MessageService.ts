@@ -43,6 +43,7 @@ export class MessageService {
                 'limit': limit,
             },
             errors: {
+                400: `Bad Request`,
                 422: `Validation Error`,
             },
         });
@@ -69,6 +70,7 @@ export class MessageService {
                 'lang': lang,
             },
             errors: {
+                400: `Bad Request`,
                 422: `Validation Error`,
             },
         });
@@ -94,6 +96,7 @@ export class MessageService {
             body: requestBody,
             mediaType: 'application/json',
             errors: {
+                400: `Bad Request`,
                 422: `Validation Error`,
             },
         });

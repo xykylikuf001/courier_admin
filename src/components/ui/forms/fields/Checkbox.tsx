@@ -1,5 +1,8 @@
-import React, {ChangeEvent} from 'react'
-import {Checkbox as MuiCheckbox, FormControl, FormControlLabel, Typography} from '@mui/material'
+import React, {ChangeEvent} from 'react';
+import MuiCheckbox from '@mui/material/Checkbox';
+import FormControl from '@mui/material/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Typography from '@mui/material/Typography';
 
 
 export interface CheckboxProps {

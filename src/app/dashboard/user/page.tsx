@@ -9,7 +9,7 @@ import {MD_DELAY} from "@/lib/constants";
 import Content from "./content";
 
 type Props = {
-    searchParams: { [key: string]: string | string[] | undefined }
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 };
 
 export const metadata: Metadata = {
@@ -17,25 +17,23 @@ export const metadata: Metadata = {
 }
 
 
-const Page = ({searchParams}: Props) => {
+const Page = async ({searchParams}: Props) => {
+    const {page, limit} = await searchParams;
+    const safePage = typeof page === 'string' ? Number(page) : 1
+    const safeLimit = typeof limit === 'string' ? Number(limit) : 10
 
-    const page =
-        typeof searchParams.page === 'string' ? Number(searchParams.page) : 1
-    const limit =
-        typeof searchParams.limit === 'string' ? Number(searchParams.limit) : 10
-
-    const fetchClient = getServerInstance(
-        {withAuth: true, next: {revalidate: MD_DELAY, tags: ["user-list"]}}
+    const fetchClient = await getServerInstance(
+        {withAuth: true, next: {revalidate: MD_DELAY, tags: ["user-list"]}, callbacks: {}}
     );
     const promise = fetchClient.account.userList(
-        {page: page, limit: limit}
+        {page: safePage, limit: safeLimit}
     );
 
     return (
         <Suspense fallback={<Skeleton/>}>
             <Await promise={promise}>
                 {({rows}) => (
-                    <Content rows={rows} page={page} limit={limit}/>
+                    <Content rows={rows} page={safePage} limit={safeLimit}/>
                 )}
             </Await>
         </Suspense>

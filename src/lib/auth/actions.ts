@@ -17,22 +17,23 @@ export const navigateToLogout = async ()=>{
 }
 
 export const destroyAuthCookies = async  (redirectRequire: boolean=true): Promise<void> => {
-    cookies().delete(AUTH_TOKEN_COOKIE)
-    cookies().delete(AUTH_REFRESH_TOKEN)
+    const cookieStore = await cookies();
+    cookieStore.delete(AUTH_TOKEN_COOKIE);
+    cookieStore.delete(AUTH_REFRESH_TOKEN);
     if (redirectRequire){
         redirect(AUTH_LOGOUT_REDIRECT) // Navigate to the new post page
     }
 }
 
 export const checkAuthCookies = async (): Promise<boolean> => {
-    const cookieStore = cookies()
+    const cookieStore = await cookies()
     const token = cookieStore.get(AUTH_TOKEN_COOKIE)
     return checkToken(token?.value)
 }
 
 export const setAuthCookies = async (response: { access_token: string, refresh_token?: string|null }, remember?: boolean) => {
     let exp = undefined;
-    const cookiesStore = cookies()
+    const cookiesStore = await cookies()
     if (remember) {
         const decoded = jwtDecode<{ exp: number }>(response.access_token);
         exp = new Date(decoded.exp * 1000);

@@ -5,7 +5,7 @@ import {z} from "zod";
 import {useRouter} from "next/navigation";
 
 import FormConstructor, {BaseFormInputProps} from "@/components/forms/FormConstructor";
-import type {ProfilePasswordIn, UserVisible, ValidationError} from "@/openapi/client";
+import type {ProfilePasswordIn, ValidationError} from "@/openapi/client";
 
 import {changePassword} from "./actions";
 
@@ -38,6 +38,7 @@ const PasswordForm = () => {
         oldPassword: "",
         password: "",
         passwordConfirm: "",
+        code: ""
     }
 
     const inputs: BaseFormInputProps[] = [

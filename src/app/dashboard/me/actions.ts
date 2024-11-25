@@ -9,17 +9,14 @@ import {checkAuthCookies} from "@/lib/auth/actions";
 import {AuthError} from "@/lib/auth/exceptions";
 
 
-
 export async function edit(values: {
     name: string;
-    username: string;
-    birthday: string;
 }) {
-    const isAuth = checkAuthCookies();
+    const isAuth = await checkAuthCookies();
     if (!isAuth) {
         throw new AuthError("You must be signed in to perform this action!");
     }
-    const fetchClient = getServerInstance();
+    const fetchClient = await getServerInstance();
     let result;
     try {
         const response = await fetchClient.account.userProfileUpdate(
@@ -45,11 +42,11 @@ export async function edit(values: {
 
 
 export async function changePassword(values: ProfilePasswordIn) {
-    const isAuth = checkAuthCookies();
+    const isAuth = await checkAuthCookies();
     if (!isAuth) {
         throw new AuthError("You must be signed in to perform this action!");
     }
-    const fetchClient = getServerInstance();
+    const fetchClient = await getServerInstance();
     let result;
     try {
         const response = await fetchClient.account.userProfileChangePassword(
@@ -75,7 +72,7 @@ export async function revoke(objId: string) {
     if (!isAuth) {
         throw new AuthError("You must be signed in to perform this action!");
     }
-    const fetchClient = getServerInstance();
+    const fetchClient = await getServerInstance();
     let result;
     try {
         const response = await fetchClient.account.authSessionRevoke(
@@ -99,11 +96,11 @@ export async function revoke(objId: string) {
 
 
 export async function revokeAll() {
-    const isAuth = checkAuthCookies();
+    const isAuth = await checkAuthCookies();
     if (!isAuth) {
         throw new AuthError("You must be signed in to perform this action!");
     }
-    const fetchClient = getServerInstance();
+    const fetchClient = await getServerInstance();
     let result;
     try {
         const response = await fetchClient.account.authSessionRevokeAll({})

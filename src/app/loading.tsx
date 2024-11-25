@@ -1,10 +1,10 @@
 "use client"
 import React from "react";
-
+import CircularProgress from '@mui/material/CircularProgress';
 export default function Loading() {
     return (
-        <div className="h-screen flex justify-center items-center">
-            <div>Loading...</div>
+        <div className="tw-h-screen tw-flex tw-justify-center tw-items-center">
+            <CircularProgress />
         </div>
     );
 }

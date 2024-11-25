@@ -3,14 +3,14 @@
 import {z} from "zod";
 import {useFormik} from "formik";
 import {toFormikValidationSchema} from "zod-formik-adapter";
-import {useRouter, useSearchParams} from "next/navigation";
+import {useRouter} from "next/navigation";
 
 import TextField from "@/components/ui/forms/fields/TextField";
 import PasswordField from "@/components/ui/forms/fields/PasswordField";
 import Checkbox from "@/components/ui/forms/fields/Checkbox";
 import Button from "@/components/ui/Button";
 import {canSubmit, checkError, getError, toastLoading, toastUpdate} from "@/lib/helper";
-import {AUTH_LOGIN_REDIRECT, WEBSITE_URL} from "@/lib/constants";
+import {AUTH_LOGIN_REDIRECT} from "@/lib/constants";
 import BaseForm from "@/components/forms/Form";
 
 import {authenticate} from "./actions";

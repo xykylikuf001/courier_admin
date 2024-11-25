@@ -1,10 +1,12 @@
-import React, {ReactNode, useEffect} from "react";
+import React, {Fragment, ReactNode, useEffect} from "react";
 import CircularProgress from '@mui/material/CircularProgress';
-import {
-    Backdrop, TextField, FormGroup,
-    Card, CardContent, CardHeader,
-    FormHelperText, Autocomplete
-} from "@mui/material";
+import Backdrop from "@mui/material/Backdrop";
+import FormGroup from "@mui/material/FormGroup";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
+import FormHelperText from "@mui/material/FormHelperText";
+import Autocomplete from "@mui/material/Autocomplete";
 import {FormikProps, FormikValues, useFormik} from "formik";
 import {ZodType} from "zod";
 import {toFormikValidationSchema} from "zod-formik-adapter";
@@ -23,6 +25,8 @@ import {canSubmit, checkError, getError, toastLoading, toastUpdate} from "@/lib/
 import {type ValidationError as ValidationErrorType} from "@/openapi/client";
 import Checkbox, {CheckboxProps} from "@/components/ui/forms/fields/Checkbox";
 import DateTimePicker, {DateTimePickerProps} from "@/components/ui/forms/fields/DateTimePicker";
+import TextField from "@/components/ui/forms/fields/TextField";
+import FormLabel from "@mui/material/FormLabel";
 
 
 type  LocalSelectProps = {
@@ -102,18 +106,21 @@ function FormInput<InputType extends BaseFormInputTypes>(
     if (input.inputType === 'textField') {
         const textInputProps = input.InputProps as TextFieldProps
         return (
-            <TextField
-                margin="normal"
-                fullWidth
-                {...textInputProps}
-                label={input.label}
-                id={input.id}
-                name={input.name}
-                value={formik.values[input.name]}
-                onChange={formik.handleChange}
-                error={checkError(formik, errors, input.name)}
-                helperText={getError(formik, errors, input.name)}
-            />
+            <Fragment>
+                <FormLabel htmlFor="email">{input.label}</FormLabel>
+                <TextField
+                    margin="normal"
+                    fullWidth
+                    {...textInputProps}
+
+                    id={input.id}
+                    name={input.name}
+                    value={formik.values[input.name]}
+                    onChange={formik.handleChange}
+                    error={checkError(formik, errors, input.name)}
+                    helperText={getError(formik, errors, input.name)}
+                />
+            </Fragment>
         );
     } else if (input.inputType === 'selectField') {
         const selectInputProps = input.InputProps as LocalSelectProps
@@ -170,9 +177,11 @@ function FormInput<InputType extends BaseFormInputTypes>(
         const datetimeFieldProps = input.InputProps as DateTimePickerProps;
         return (
             <FormGroup>
+                <FormLabel htmlFor="email">{input.label}</FormLabel>
+
                 <DateTimePicker {...datetimeFieldProps} fullWidth={true}
                                 name={input.name}
-                                label={input.label}
+                                // label={input.label}
                                 id={input.id}
                                 onChange={(value: string|"") => formik.setFieldValue(input.name, value)}
                                 value={formik.values[input.name]}
@@ -224,6 +233,7 @@ interface Props<T> {
     extraValues?: Record<string, string | number | null | File> | null
     onReset?: () => void;
     withConfirm?: boolean;
+    resetForm?: boolean;
 }
 
 
@@ -241,6 +251,7 @@ function FormConstructor<T extends FormikValues = FormikValues>(
         redirect = '#',
         extraValues,
         onReset,
+        resetForm=false,
     }: Props<T>
 ) {
     const confirm = useConfirm();
@@ -253,14 +264,15 @@ function FormConstructor<T extends FormikValues = FormikValues>(
 
 
     const handleSubmit = async (values: T) => {
-
         confirm().then(async () => {
             const toastId = toastLoading("Please wait!")
             const callback = async (props: { isError: boolean, message?: string | null }) => {
                 if (props.isError) {
                     toastUpdate(toastId, props.message ?? "Failed with error", 'warning');
                 } else {
-                    formik.resetForm()
+                    if (resetForm){
+                        formik.resetForm()
+                    }
                     toastUpdate(toastId, props.message ?? "Successfully completed", 'success');
                 }
             }
@@ -275,7 +287,9 @@ function FormConstructor<T extends FormikValues = FormikValues>(
 
 
     const handleReset = () => {
-        formik.resetForm()
+
+            formik.resetForm()
+
         if (onReset) onReset()
     }
 
@@ -300,6 +314,7 @@ function FormConstructor<T extends FormikValues = FormikValues>(
             </form>
             {/*<pre><code>{JSON.stringify(formik.errors, null, 2)}</code></pre>*/}
             {/*<pre><code>{JSON.stringify(extraValues, null, 2)}</code></pre>*/}
+            {/*<pre><code>{JSON.stringify(errors, null, 2)}</code></pre>*/}
         </div>
     )
 }

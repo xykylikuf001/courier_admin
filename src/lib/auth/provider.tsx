@@ -1,9 +1,11 @@
 'use client'
 import React, {useEffect, useState} from "react";
 import {parseCookies} from "nookies";
+import jwtDecode from "jwt-decode";
+
 import {UserVisible} from "@/openapi/client";
 import {AUTH_TOKEN_COOKIE} from "@/lib/constants";
-import jwtDecode from "jwt-decode";
+import {navigateToLogout} from "@/lib/auth/actions";
 
 interface TokenPayload {
     user_id: string
@@ -26,16 +28,19 @@ const AuthContext = React.createContext<AuthContextType>({
     payload: null,
     refreshTokenPayload: () => undefined,
     user: null,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     setUserData: (value) => undefined,
     token: null,
 })
 
 const retrievePayload = (token: string) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [schema, _token] = token.split(' ');
 
     try {
         return jwtDecode(_token);
-    } catch (error) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error: any) {
         return null;
     }
 }
@@ -55,13 +60,36 @@ function AuthProvider({children}: { children: React.ReactNode }) {
             setPayload(tokenPayload as TokenPayload)
         } else {
             setPayload(null);
+            setUser(null);
         }
     }
+
+    const userFetchCallback = React.useCallback(async () => {
+        if (!token) return
+        try {
+            const response =  await fetch(`/api/auth/me`, {
+                cache: 'no-store',
+                next: { revalidate: 10 },
+            })
+            const data: {data: UserVisible | null, status: number} = await response.json()
+            if (data.status === 200) {
+                setUser(data.data);
+            } else if (data.status === 401){
+                await navigateToLogout()
+            }
+        } catch (e: any) {
+            console.log(e)
+            setUser(null)
+        }
+    }, [token])
 
     useEffect(() => {
         refreshTokenPayload();
     }, [token])
 
+    useEffect(() => {
+        userFetchCallback();
+    }, [userFetchCallback])
 
     const memoValue = React.useMemo(
         () => ({

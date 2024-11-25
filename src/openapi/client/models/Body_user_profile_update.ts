@@ -3,9 +3,6 @@
 /* tslint:disable */
 /* eslint-disable */
 export type Body_user_profile_update = {
-    upload_file?: (Blob | null);
     name: string;
-    username: string;
-    birthday: string;
 };
 

@@ -1,24 +1,27 @@
 import type {Metadata} from "next";
 
-import getServerInstance from "@/openapi/server-instance";
+import getServerInstance, {callRequest} from "@/openapi/server-instance";
 import {MD_DELAY} from "@/lib/constants";
 import Content from "./content";
+import {UserVisible} from "@/openapi/client";
 
 export const metadata: Metadata = {
     title: 'View single user',
 }
 
 type Props = {
-    params: { id: string }
+    params: Promise<{ id: string }>
 };
 
 
-const Page = async ({params: {id}}: Props) => {
-
-    const fetchClient = getServerInstance(
+const Page = async ({params}: Props) => {
+    const {id} = await params;
+    const fetchClient = await getServerInstance(
         {next: {revalidate: MD_DELAY, tags: ['user-detail']}, withAuth: true}
     );
-    const data = await fetchClient.account.userDetail({objId: id})
+    const data: UserVisible = await callRequest({
+        instance:fetchClient, service:"account",action: "userDetail",params: {"objId": id}
+    })
 
     return (
         <Content data={data}/>

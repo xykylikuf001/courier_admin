@@ -1,5 +1,12 @@
 import React, {ReactNode} from "react";
-import {Box, Paper, Card, CardContent, CardHeader, Stack, Button, CardActions} from "@mui/material";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import CardActions from "@mui/material/CardActions";
 
 
 

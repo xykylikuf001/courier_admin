@@ -1,13 +1,18 @@
 import React from "react";
+import ModernLayout from "@/components/layout/modern/ModernLayout";
 
-import DashboardLayout from "@/components/layout/DashboardLayout";
+// import DashboardLayout from "@/components/layout/DashboardLayout";
 
 
 async function Layout({children}: { children: React.ReactNode; }) {
     return (
-        <DashboardLayout>
+        // <DashboardLayout>
+        // </DashboardLayout>
+
+        <ModernLayout>
             {children}
-        </DashboardLayout>
+
+        </ModernLayout>
     )
 }
 export default Layout;

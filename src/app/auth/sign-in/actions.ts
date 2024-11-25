@@ -19,7 +19,7 @@ export interface AuthProps {
 
 
 export async function authenticate(values: AuthProps): Promise<IResponse> {
-    const fetchClient = getServerInstance({withAuth: false, next: {revalidate: 0}});
+    const fetchClient = await getServerInstance({withAuth: false, next: {revalidate: 0}});
     try {
         const response = await fetchClient.account.getToken(
             {formData: {username: values.username, password: values.password}}
@@ -27,7 +27,6 @@ export async function authenticate(values: AuthProps): Promise<IResponse> {
         await setAuthCookies(response, values.remember);
         return {status: 200, message: null, errors: null}
     } catch (e: any) {
-        // console.log(e.body.detail[0].loc)
         if (e instanceof ApiError) {
             if (e.status === 422) {
                 return {status: e.status, message: "Please provide valid data", errors: e.body.detail}

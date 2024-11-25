@@ -1,6 +1,6 @@
 "use client"
 import {ReactNode} from "react";
-import {Collapse as MuiCollapse} from '@mui/material';
+import MuiCollapse from '@mui/material/Collapse';
 import {TransitionProps} from "@mui/material/transitions/transition";
 
 interface Props {

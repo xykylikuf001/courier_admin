@@ -1,5 +1,8 @@
 import React from "react";
-import {Stack, Button, Box, CardActions} from "@mui/material";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import CardActions from "@mui/material/CardActions";
 import {NextLinkComposed} from "@/components/Link";
 
 interface Props {

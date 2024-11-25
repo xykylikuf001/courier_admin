@@ -4,7 +4,7 @@ import {AUTH_TOKEN_COOKIE, AUTH_LOGIN_URL} from "@/lib/constants";
 import {redirect, RedirectType} from "next/navigation";
 
 const Page = async () => {
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     const token = cookieStore.get(AUTH_TOKEN_COOKIE)
     if (!token) {
         redirect(AUTH_LOGIN_URL, RedirectType.replace)
