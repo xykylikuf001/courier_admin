@@ -38,6 +38,7 @@ export class FileService {
                 'limit': limit,
             },
             errors: {
+                400: `Bad Request`,
                 422: `Validation Error`,
             },
         });
@@ -63,6 +64,7 @@ export class FileService {
             formData: formData,
             mediaType: 'multipart/form-data',
             errors: {
+                400: `Bad Request`,
                 422: `Validation Error`,
             },
         });
@@ -89,6 +91,7 @@ export class FileService {
                 'lang': lang,
             },
             errors: {
+                400: `Bad Request`,
                 422: `Validation Error`,
             },
         });
@@ -119,6 +122,7 @@ export class FileService {
             body: requestBody,
             mediaType: 'application/json',
             errors: {
+                400: `Bad Request`,
                 422: `Validation Error`,
             },
         });
@@ -145,6 +149,7 @@ export class FileService {
                 'lang': lang,
             },
             errors: {
+                400: `Bad Request`,
                 422: `Validation Error`,
             },
         });
@@ -175,6 +180,7 @@ export class FileService {
                 'limit': limit,
             },
             errors: {
+                400: `Bad Request`,
                 422: `Validation Error`,
             },
         });

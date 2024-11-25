@@ -4,7 +4,7 @@ import Content from "./content";
 
 const Page = async () => {
 
-    const fetchClient = getServerInstance(
+    const fetchClient = await getServerInstance(
         {next: {revalidate: MD_DELAY, tags: ['get-me', "auth-session"]}, withAuth: true}
     );
     const data = await fetchClient.account.me({})

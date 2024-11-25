@@ -16,10 +16,11 @@ const Form = () => {
     const [errors, setErrors] = useState<ValidationError[] | null>(null);
 
     const inputs: BaseFormInputProps[] = [
+
         {
-            id: "username",
-            name: "username",
-            label: "Username",
+            id: "name",
+            name: "name",
+            label: "Name",
             inputType: "textField",
             InputProps: {
                 required: true,
@@ -37,6 +38,15 @@ const Form = () => {
             }
         },
         {
+            id: "phone",
+            name: "phone",
+            label: "Phone",
+            inputType: "textField",
+            InputProps: {
+                type: "text",
+            }
+        },
+        {
             id: "password",
             name: "password",
             label: "Password",
@@ -44,24 +54,8 @@ const Form = () => {
             InputProps: {
                 required: true,
                 type: "text",
-            }
-        },
-        {
-            id: "name",
-            name: "name",
-            label: "Name",
-            inputType: "textField",
-            InputProps: {
-                required: true,
-                type: "text",
-            }
-        },
-        {
-            id: "birthday",
-            name: "birthday",
-            label: "Birthday",
-            inputType: "datetimeField",
 
+            }
         },
         {
             id: "isActive",
@@ -69,24 +63,18 @@ const Form = () => {
             label: "Is active",
             inputType: "checkboxField",
         },
-        {
-            id: "isStaff",
-            name: "isStaff",
-            label: "Is staff",
-            inputType: "checkboxField",
-        },
-
     ]
 
     const schema = z.object(
         {
-            username: z.string({required_error: "This field is required"}),
             email: z.string().email("Please fill valid email").optional(),
+            phone: z.string().optional(),
             name: z.string({required_error: "This field is required"}),
+            password: z.string({required_error: "This field is required"}).min(
+                8, "Password must not be shorter than 8 symbols"
+            ),
 
-            isStaff: z.boolean().optional(),
             isActive: z.boolean().optional(),
-            birthday: z.string({required_error: "This field is required"}).datetime({"message": "Please fill valid date"}),
         }
     )
 
@@ -96,13 +84,12 @@ const Form = () => {
         message?: string | null
     }) => Promise<void>) => {
         const response = await create({
-            username: values.username,
             password: values.password,
+            phone: values.phone,
             email: values.email,
             name: values.name,
             isStaff: values.isStaff,
             isActive: values.isActive,
-            birthday: values.birthday
         })
         if (response.status === 201) {
             await callback({
@@ -115,6 +102,7 @@ const Form = () => {
             }
         } else {
             await callback({isError: true, message: response.message})
+
             if (response.status === 422) setErrors(response.errors)
         }
     }
@@ -126,9 +114,8 @@ const Form = () => {
         name: "",
         isActive: true,
         isStaff: false,
-        birthday: "",
+        phone: "",
     }
-
     return (
         <FormConstructor<UserCreate>
             onSubmit={handleSubmit}

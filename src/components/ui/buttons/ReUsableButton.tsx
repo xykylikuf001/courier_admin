@@ -1,7 +1,7 @@
 "use client"
 import React, {ReactNode} from "react";
 
-import {Tooltip} from "@mui/material";
+import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import {useConfirm} from "material-ui-confirm";
 import {MdSmartButton} from "react-icons/md";
@@ -29,7 +29,7 @@ const ReUsableButton = (
         onCancel,
         confirmText,
         type,
-        href="/",
+        href = "/",
     }: Props) => {
     const confirm = useConfirm()
 
@@ -39,8 +39,11 @@ const ReUsableButton = (
         ).then(async () => {
             const toastId = toastLoading("Please wait!")
             const callback = async (props: { isError: boolean, message?: string | null }) => {
+                console.log(toastId, "toastId")
+                console.log(props, "reussablebutton")
                 if (props.isError) {
                     toastUpdate(toastId, props.message ?? "Something went wrong!", 'warning');
+                    console.log("error", "eoeoeoeoe")
                 } else {
                     toastUpdate(toastId, props.message ?? "Action successfully done!", 'success');
                 }
@@ -55,7 +58,7 @@ const ReUsableButton = (
         return (
             <Tooltip title={title} placement="top">
                 <IconButton
-                    onClick={() => handleClick()} aria-label="button">
+                    onClick={handleClick} aria-label="button">
                     {icon ? icon : <MdSmartButton/>}
                 </IconButton>
             </Tooltip>
@@ -65,7 +68,7 @@ const ReUsableButton = (
             <Link noLinkStyle href={href}>
                 <MenuItem disableRipple>
                     <ListItemIcon>
-                        {icon ? icon : <MdSmartButton />}
+                        {icon ? icon : <MdSmartButton/>}
                     </ListItemIcon>
                     <ListItemText className="text-base">{title}</ListItemText>
                 </MenuItem>

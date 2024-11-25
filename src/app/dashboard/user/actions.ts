@@ -12,17 +12,17 @@ interface IResponse {
 }
 
 export const deleteAction = async (id: string): Promise<IResponse> => {
-    const isAuth = checkAuthCookies();
+    const isAuth = await checkAuthCookies();
     if (!isAuth) {
         throw new AuthError("You must be signed in to perform this action!");
     }
-    const fetchClient = getServerInstance({withAuth: true});
+    const fetchClient = await getServerInstance({withAuth: true});
     let result = undefined;
     try {
         await fetchClient.account.userDelete({objId: id}
         );
         result = {status: 200, message: null};
-    } catch (e: any) {
+    } catch {
         return {status: 500, message: "Something went wrong!"};
     }
     revalidateTag("user-list");

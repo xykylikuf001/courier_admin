@@ -17,11 +17,11 @@ interface IResponse {
 }
 
 export const create = async (values: UserCreate): Promise<IResponse> => {
-    const isAuth = checkAuthCookies();
+    const isAuth = await checkAuthCookies();
     if (!isAuth) {
         throw new AuthError("You must be signed in to perform this action!");
     }
-    const fetchClient = getServerInstance({withAuth: true});
+    const fetchClient = await getServerInstance({withAuth: true});
     let result = undefined;
     try {
         const response = await fetchClient.account.userCreate(
@@ -29,7 +29,6 @@ export const create = async (values: UserCreate): Promise<IResponse> => {
         );
         result = {status: 201, message: response.message, data: response.data, errors: null};
     } catch (e: any) {
-        console.log(e.body.detail)
         if (e instanceof ApiError) {
             if (e.status === 422) {
                 return {status: e.status, message: "Please provide valid data", errors: e.body.detail, data: null};

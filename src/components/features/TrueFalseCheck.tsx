@@ -1,4 +1,3 @@
-
 import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
 import DoNotDisturbOutlinedIcon from '@mui/icons-material/DoNotDisturbOutlined';
 import Chip from '@mui/material/Chip';
@@ -12,7 +11,7 @@ const TrueFalseCheck = (
         trueMessage
     }: { label?: string | undefined, isTrue?: boolean | undefined, falseMessage?: string, trueMessage?: string }) => {
     if (isTrue) return (
-        <Tooltip  title={trueMessage ?? ''}>
+        <Tooltip title={trueMessage ?? ''}>
             <Chip label={label} color={'success'} icon={<CheckCircleOutlinedIcon/>}/>
         </Tooltip>
     )

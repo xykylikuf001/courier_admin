@@ -16,8 +16,6 @@ interface Props {
 
 interface ProfileUpdate  {
     name: string;
-    username: string;
-    birthday: string;
 }
 
 const Form = ({data}: Props) => {
@@ -46,21 +44,9 @@ const Form = ({data}: Props) => {
     }
     const initialValues = {
         name: data.name,
-        username: data.username,
-        birthday: data.birthday??""
     }
 
     const inputs: BaseFormInputProps[] = [
-        {
-            id: "username",
-            name: "username",
-            label: "Username",
-            inputType: "textField",
-            InputProps: {
-                required: true,
-                type: "text",
-            }
-        },
         {
             id: "name",
             name: "name",
@@ -77,7 +63,6 @@ const Form = ({data}: Props) => {
     const schema = z.object(
         {
             name: z.string({required_error: "This field is required"}),
-            username: z.string({required_error: "This field is required"}),
         }
     )
 

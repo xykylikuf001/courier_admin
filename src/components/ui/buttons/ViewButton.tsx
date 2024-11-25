@@ -1,6 +1,6 @@
 "use client"
 
-import {Tooltip} from "@mui/material";
+import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 
 import React from "react";

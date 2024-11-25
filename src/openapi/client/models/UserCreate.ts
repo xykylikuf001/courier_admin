@@ -2,13 +2,16 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { UserTypeChoices } from './UserTypeChoices';
 export type UserCreate = {
-    email?: (string | null);
+    email: string;
+    emailVerifiedAt?: (string | null);
+    phone?: (string | null);
+    phoneVerifiedAt?: (string | null);
     name: string;
     password: string;
-    username: string;
     isStaff?: (boolean | null);
     isActive?: (boolean | null);
-    birthday?: (string | null);
+    userType?: (UserTypeChoices | null);
 };
 

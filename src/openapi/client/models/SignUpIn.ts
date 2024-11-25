@@ -3,14 +3,12 @@
 /* tslint:disable */
 /* eslint-disable */
 export type SignUpIn = {
+    withEmail?: (boolean | null);
     name: string;
-    email: string;
-    username: string;
+    phone?: (string | null);
+    email?: (string | null);
     passwordConfirm: string;
     password: string;
-    birthday: string;
-    promoCode?: (string | null);
-    invitationId?: (string | null);
     subscription?: (boolean | null);
     policy: boolean;
 };

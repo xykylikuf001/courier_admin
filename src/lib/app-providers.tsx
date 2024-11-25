@@ -7,9 +7,24 @@ import {useServerInsertedHTML} from "next/navigation";
 
 import {CacheProvider} from "@emotion/react";
 import createCache from "@emotion/cache";
+import CssBaseline from '@mui/material/CssBaseline';
 
-import ThemeProvider from "./theme-provider";
+// import ThemeProvider from "./theme-provider";
 import AuthProvider from "@/lib/auth/provider";
+import AppTheme from "@/shared-theme/AppTheme";
+import {
+    chartsCustomizations,
+    dataGridCustomizations,
+    datePickersCustomizations,
+    treeViewCustomizations,
+} from '@/lib/theme/customizations';
+
+const xThemeComponents = {
+    ...chartsCustomizations,
+    ...dataGridCustomizations,
+    ...datePickersCustomizations,
+    ...treeViewCustomizations,
+};
 
 
 type Props = {
@@ -62,9 +77,12 @@ const AppProviders = (props: Props) => {
     return (
         <AuthProvider>
             <CacheProvider value={cache}>
-                <ThemeProvider>
+                <AppTheme themeComponents={xThemeComponents} disableCustomTheme={false}>
+                    <CssBaseline enableColorScheme />
                     {props.children}
-                </ThemeProvider>
+                </AppTheme>
+                {/*<ThemeProvider>*/}
+                {/*</ThemeProvider>*/}
             </CacheProvider>
         </AuthProvider>
     );

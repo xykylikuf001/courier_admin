@@ -1,0 +1,122 @@
+import { alpha, Theme, Components } from '@mui/material/styles';
+import { gray } from '../themePrimitives';
+
+/* eslint-disable import/prefer-default-export */
+export const surfacesCustomizations: Components<Theme> = {
+    MuiAccordion: {
+        defaultProps: {
+            elevation: 0,
+            disableGutters: true,
+        },
+        styleOverrides: {
+            root: ({ theme }) => ({
+                padding: 4,
+                overflow: 'clip',
+                backgroundColor: theme.palette.background.default,
+                border: '1px solid',
+                borderColor: theme.palette.divider,
+                ':before': {
+                    backgroundColor: 'transparent',
+                },
+                '&:not(:last-of-type)': {
+                    borderBottom: 'none',
+                },
+                '&:first-of-type': {
+                    borderTopLeftRadius: theme.shape.borderRadius,
+                    borderTopRightRadius: theme.shape.borderRadius,
+                },
+                '&:last-of-type': {
+                    borderBottomLeftRadius: theme.shape.borderRadius,
+                    borderBottomRightRadius: theme.shape.borderRadius,
+                },
+            }),
+        },
+    },
+    MuiAccordionSummary: {
+        styleOverrides: {
+            root: ({ theme }) => ({
+                border: 'none',
+                borderRadius: 8,
+                '&:hover': { backgroundColor: gray[50] },
+                '&:focus-visible': { backgroundColor: 'transparent' },
+                ...theme.applyStyles('dark', {
+                    '&:hover': { backgroundColor: gray[800] },
+                }),
+            }),
+        },
+    },
+    MuiAccordionDetails: {
+        styleOverrides: {
+            root: { mb: 20, border: 'none' },
+        },
+    },
+    MuiPaper: {
+        defaultProps: {
+            elevation: 0,
+        },
+    },
+    MuiCard: {
+        styleOverrides: {
+            root: ({ theme }) => {
+                return {
+                    // padding: 16,
+                    // gap: 16,
+                    transition: 'all 100ms ease',
+                    backgroundColor: gray[50],
+                    borderRadius: theme.shape.borderRadius,
+                    border: `1px solid ${theme.palette.divider}`,
+                    boxShadow: 'none',
+                    ...theme.applyStyles('dark', {
+                        backgroundColor: gray[800],
+                    }),
+                    variants: [
+                        {
+                            props: {
+                                variant: 'outlined',
+                            },
+                            style: {
+                                border: `1px solid ${theme.palette.divider}`,
+                                boxShadow: 'none',
+                                background: 'hsl(0, 0%, 100%)',
+                                ...theme.applyStyles('dark', {
+                                    background: alpha(gray[900], 0.4),
+                                }),
+                            },
+                        },
+                    ],
+                };
+            },
+        },
+    },
+    MuiCardContent: {
+        styleOverrides: {
+            root: {
+                padding: 15,
+                '&:last-child': { paddingBottom: 15 },
+            },
+        },
+    },
+    MuiCardHeader: {
+        styleOverrides: {
+            root: {
+                // padding: 0,
+
+                paddingLeft: "30px",
+                paddingRight: "30px",
+                // backgroundColor: "#e7e6e6",
+                borderBottom: "1px solid #3e3e3e"
+            },
+        },
+    },
+    MuiCardActions: {
+        styleOverrides: {
+            root: {
+                // padding: 0,
+
+                paddingLeft: "18px",
+                paddingRight: "18px",
+                // backgroundColor: mode === "dark" ? "#22272E" : "#F6F8FA"
+            },
+        },
+    },
+};

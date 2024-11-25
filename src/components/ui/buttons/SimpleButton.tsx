@@ -1,7 +1,7 @@
 "use client"
 import React, {ReactNode} from "react";
 
-import {Tooltip} from "@mui/material";
+import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import {MdSmartButton} from "react-icons/md";
 import MenuItem from "@mui/material/MenuItem";

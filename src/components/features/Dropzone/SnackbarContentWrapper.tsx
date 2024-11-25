@@ -1,6 +1,7 @@
 "use client"
 
-import {IconButton, SnackbarContent} from '@mui/material';
+import SnackbarContent from '@mui/material/SnackbarContent';
+import IconButton from '@mui/material/IconButton';
 import {styled} from '@mui/system';
 import {
     MdCheckCircle,

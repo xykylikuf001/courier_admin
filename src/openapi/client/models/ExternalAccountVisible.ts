@@ -7,6 +7,7 @@ export type ExternalAccountVisible = {
     id: number;
     userId: string;
     accountId: string;
+    phone: string;
     username: string;
     createdAt: string;
     service_type: ChoiceBase_ServiceTypeChoices_;

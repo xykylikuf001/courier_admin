@@ -24,6 +24,7 @@ export class FaviconService {
                 'lang': lang,
             },
             errors: {
+                400: `Bad Request`,
                 422: `Validation Error`,
             },
         });

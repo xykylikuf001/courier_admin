@@ -2,21 +2,21 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { ChoiceBase_UserTypeChoices_ } from './ChoiceBase_UserTypeChoices_';
 import type { ExternalAccountVisible } from './ExternalAccountVisible';
-import type { FileVisible } from './FileVisible';
-import type { WalletVisible } from './WalletVisible';
+import type { UserSessionVisible } from './UserSessionVisible';
 export type UserVisible = {
     id: string;
     name: string;
-    username: string;
     email?: (string | null);
     emailVerifiedAt?: (string | null);
+    phone?: (string | null);
+    phoneVerifiedAt?: (string | null);
     createdAt: string;
     isStaff: boolean;
     isActive: boolean;
-    birthday?: (string | null);
-    wallet?: (WalletVisible | null);
-    external_accounts?: Array<ExternalAccountVisible>;
-    image?: (FileVisible | null);
+    userType: ChoiceBase_UserTypeChoices_;
+    externalAccounts?: Array<ExternalAccountVisible>;
+    sessions?: Array<UserSessionVisible>;
 };
 

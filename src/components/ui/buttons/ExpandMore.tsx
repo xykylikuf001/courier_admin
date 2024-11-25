@@ -1,6 +1,7 @@
 "use client"
-import {styled} from '@mui/material/styles';
-import {Tooltip} from "@mui/material";
+import {styled} from "@mui/material/styles";
+import Tooltip from "@mui/material/Tooltip";
+
 import IconButton, {IconButtonProps} from '@mui/material/IconButton';
 import {MdExpandMore} from 'react-icons/md';
 
@@ -9,10 +10,10 @@ interface ExpandMoreProps extends IconButtonProps {
 }
 
 const ExpandMore = styled((props: ExpandMoreProps) => {
-    const {expand, ...other} = props;
+
     return (
         <Tooltip title='Expand' placement="top">
-            <IconButton {...other}>
+            <IconButton {...props}>
                 <MdExpandMore/>
             </IconButton>
         </Tooltip>

@@ -1,18 +1,19 @@
 "use client"
 
 import DetailTable from "@/components/table/DetailTable";
-import {TableCell, TableRow} from "@mui/material";
+import TableCell from "@mui/material/TableCell";
+import TableRow from "@mui/material/TableRow";
 import {formatDatetime} from "@/lib/helper";
 import {UserVisible, UserSessionVisible} from "@/openapi/client";
+
 import PasswordForm from "./password-form";
 import UserSessions from "./user-sessions";
-
 import Form from "./form";
 
 
 const Content = ({data, sessions}: { data: UserVisible, sessions: UserSessionVisible[] }) => {
     return (
-        <div className="space-y-10">
+        <div className="tw-space-y-10">
             <DetailTable title={"User"} hasData={true}>
                 <TableRow>
                     <TableCell component="th" scope="row">
@@ -24,10 +25,34 @@ const Content = ({data, sessions}: { data: UserVisible, sessions: UserSessionVis
                 </TableRow>
                 <TableRow>
                     <TableCell component="th" scope="row">
-                        Username
+                        Name
                     </TableCell>
                     <TableCell>
-                        {data.username}
+                        {data.name}
+                    </TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell component="th" scope="row">
+                        Email
+                    </TableCell>
+                    <TableCell>
+                        {data.email}
+                    </TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell component="th" scope="row">
+                        Phone
+                    </TableCell>
+                    <TableCell>
+                        {data.phone}
+                    </TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell component="th" scope="row">
+                        User type
+                    </TableCell>
+                    <TableCell>
+                        {data.userType.label}
                     </TableCell>
                 </TableRow>
                 <TableRow>

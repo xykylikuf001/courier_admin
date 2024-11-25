@@ -6,19 +6,25 @@ import type { BaseHttpRequest } from './core/BaseHttpRequest';
 import type { OpenAPIConfig } from './core/OpenAPI';
 import { FetchHttpRequest } from './core/FetchHttpRequest';
 import { AccountService } from './services/AccountService';
+import { ConfigService } from './services/ConfigService';
 import { DefaultService } from './services/DefaultService';
 import { FaviconService } from './services/FaviconService';
-import { LobbyService } from './services/LobbyService';
-import { PaymentService } from './services/PaymentService';
-import { WalletService } from './services/WalletService';
+import { FileService } from './services/FileService';
+import { LocationService } from './services/LocationService';
+import { MessageService } from './services/MessageService';
+import { OrderService } from './services/OrderService';
+import { ReleaseService } from './services/ReleaseService';
 type HttpRequestConstructor = new (config: OpenAPIConfig) => BaseHttpRequest;
 export class FetchClient {
     public readonly account: AccountService;
+    public readonly config: ConfigService;
     public readonly default: DefaultService;
     public readonly favicon: FaviconService;
-    public readonly lobby: LobbyService;
-    public readonly payment: PaymentService;
-    public readonly wallet: WalletService;
+    public readonly file: FileService;
+    public readonly location: LocationService;
+    public readonly message: MessageService;
+    public readonly order: OrderService;
+    public readonly release: ReleaseService;
     public readonly request: BaseHttpRequest;
     constructor(config?: Partial<OpenAPIConfig>, HttpRequest: HttpRequestConstructor = FetchHttpRequest) {
         this.request = new HttpRequest({
@@ -35,11 +41,14 @@ export class FetchClient {
             CALLBACKS: config?.CALLBACKS??null,
         });
         this.account = new AccountService(this.request);
+        this.config = new ConfigService(this.request);
         this.default = new DefaultService(this.request);
         this.favicon = new FaviconService(this.request);
-        this.lobby = new LobbyService(this.request);
-        this.payment = new PaymentService(this.request);
-        this.wallet = new WalletService(this.request);
+        this.file = new FileService(this.request);
+        this.location = new LocationService(this.request);
+        this.message = new MessageService(this.request);
+        this.order = new OrderService(this.request);
+        this.release = new ReleaseService(this.request);
     }
 }
 

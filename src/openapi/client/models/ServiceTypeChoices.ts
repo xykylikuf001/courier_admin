@@ -8,4 +8,6 @@ export enum ServiceTypeChoices {
     BINANCE = 'binance',
     EMAIL = 'email',
     STEAM = 'steam',
+    GOOGLE = 'google',
+    PHONE = 'phone',
 }

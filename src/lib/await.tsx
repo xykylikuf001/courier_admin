@@ -10,17 +10,23 @@ export default async function Await<T>(
         promise: Promise<T>
         children: (value: T) => JSX.Element
     }) {
+    let error: ApiError|null = null;
     try {
-        let data = await promise;
+        const data = await promise;
         return children(data);
     } catch (e) {
         if (e instanceof ApiError && e.status === 401) {
-            redirect(AUTH_LOGOUT_URL, RedirectType.replace)
+            error = e;
+        } else{
+
+            return (
+                <div className="h-full w-full flex items-center justify-center">
+                    <div>Error handler - Await component</div>
+                </div>
+            )
         }
-        return (
-            <div className="h-full w-full flex items-center justify-center">
-                <div>Error handler - Await component</div>
-            </div>
-        )
+    }
+    if (error){
+        redirect(AUTH_LOGOUT_URL, RedirectType.replace)
     }
 }

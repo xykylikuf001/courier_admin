@@ -4,7 +4,7 @@ import {MdEdit} from "react-icons/md";
 import ListItemIcon from '@mui/material/ListItemIcon';
 
 import ListItemText from '@mui/material/ListItemText';
-import {Tooltip} from "@mui/material";
+import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import MenuItem from "@mui/material/MenuItem";
 

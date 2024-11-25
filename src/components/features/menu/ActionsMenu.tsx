@@ -24,6 +24,7 @@ const ActionsMenu = (
         if (isMiniButton) {
             return (
                 <IconButton
+                    size="small"
                     onClick={handleClick} aria-label="settings">
                     <MdMoreVert/>
                 </IconButton>

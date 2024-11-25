@@ -1,6 +1,7 @@
 "use client"
 import {styled} from '@mui/material/styles'
-import {LinearProgress, TableCell} from '@mui/material'
+import LinearProgress from '@mui/material/LinearProgress'
+import TableCell from '@mui/material/TableCell'
 
 export const StyledTableCell = styled(TableCell)`
   position: absolute;

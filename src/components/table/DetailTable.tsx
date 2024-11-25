@@ -2,7 +2,10 @@
 import React, {ReactNode} from "react";
 
 import Typography from "@mui/material/Typography";
-import {CardContent, Table as MuiTable, Card, CardHeader} from '@mui/material';
+import CardContent from '@mui/material/CardContent';
+import MuiTable from '@mui/material/Table';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
 import TableContainer from '@mui/material/TableContainer';
 import TableBody from '@mui/material/TableBody';
 
