@@ -168,7 +168,6 @@ export default function Content() {
                             type="password"
                             id="password"
                             autoComplete="current-password"
-                            autoFocus
                             required
                             fullWidth
                             variant="outlined"

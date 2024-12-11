@@ -10,7 +10,7 @@ const Content = () => {
     },[])
 
     return (
-        <div className="tw-w-full tw-bg-gray-200 tw-h-full tw-flex tw-items-center tw-justify-center">
+        <div className="tw-w-full tw-bg-gray-200 tw-h-screen tw-flex tw-items-center tw-justify-center">
             <div className="tw-mx-auto tw-max-w-md tw-w-full tw-bg-white tw-p-8 tw-shadow-lg">
                 <h2 className="tw-text-2xl tw-font-bold tw-mb-4 tw-text-center tw-text-gray-900">
                     Hope to see you soon! 👋
