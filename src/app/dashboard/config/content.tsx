@@ -6,9 +6,7 @@ import Chip from '@mui/material/Chip';
 
 import DetailTable from "@/components/table/DetailTable";
 import RefreshButton from "@/components/ui/buttons/RefreshButton";
-import ActionsMenu from "@/components/features/menu/ActionsMenu";
 import EditButton from "@/components/ui/buttons/EditButton";
-import TranslationButton from "@/components/ui/buttons/TranslationButton";
 import {ConfigVisible} from "@/openapi/client";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
@@ -19,11 +17,7 @@ const Content = ({data}: { data: ConfigVisible }) => {
     const action = (
         <Stack direction={"row"} spacing={0.1}>
             <RefreshButton onClick={() => router.refresh()}/>
-            <ActionsMenu isMiniButton={true}>
-
-                <EditButton href="/dashboard/config/manage"/>
-                <TranslationButton href="/dashboard/config/translation"/>
-            </ActionsMenu>
+            <EditButton type="iconButton" href="/dashboard/config/manage"/>
         </Stack>
     )
 

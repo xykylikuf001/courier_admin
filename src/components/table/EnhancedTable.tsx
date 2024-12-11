@@ -178,7 +178,7 @@ function EnhancedTable<T>(
                 />
             } else {
                 extraActions = (
-                    <ActionsMenu isMiniButton={false}>
+                    <ActionsMenu >
                         {
                             selectAction.map((item, i) => {
                                 return (

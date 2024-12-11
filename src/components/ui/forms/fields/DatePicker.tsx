@@ -4,7 +4,7 @@ import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFnsV3';
 
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker as MuiDatePicker } from '@mui/x-date-pickers/DatePicker';
-import ButtonField from "@/components/ui/forms/fields/ButtonField";
+import ButtonField from "./ButtonField";
 
 export default function DatePicker() {
     const [value, setValue] = React.useState<Date | null>(new Date());

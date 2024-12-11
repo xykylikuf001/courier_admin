@@ -16,6 +16,7 @@ import type { IResponseBase_Union_UserSessionVisible__NoneType__ } from '../mode
 import type { IResponseBase_UserSessionVisible_ } from '../models/IResponseBase_UserSessionVisible_';
 import type { IResponseBase_UserVisible_ } from '../models/IResponseBase_UserVisible_';
 import type { LanguagesChoices } from '../models/LanguagesChoices';
+import type { PasswordIn } from '../models/PasswordIn';
 import type { ProfileChangeEmail } from '../models/ProfileChangeEmail';
 import type { ProfilePasswordIn } from '../models/ProfilePasswordIn';
 import type { ResetPassword } from '../models/ResetPassword';
@@ -36,15 +37,15 @@ export class AccountService {
      * @throws ApiError
      */
     public logout({
-        lang,
+        locale,
     }: {
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<IResponseBase_Union_UserSessionVisible__NoneType__> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/api/v1/auth/logout/',
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             errors: {
                 400: `Bad Request`,
@@ -60,16 +61,16 @@ export class AccountService {
      */
     public getToken({
         formData,
-        lang,
+        locale,
     }: {
         formData: Body_get_token,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<Token> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/api/v1/auth/get-token/',
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             formData: formData,
             mediaType: 'application/x-www-form-urlencoded',
@@ -86,16 +87,16 @@ export class AccountService {
      */
     public getTokenByPhone({
         requestBody,
-        lang,
+        locale,
     }: {
         requestBody: AuthPhone,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<Token> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/api/v1/auth/get-token/by-phone/',
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             body: requestBody,
             mediaType: 'application/json',
@@ -112,16 +113,16 @@ export class AccountService {
      */
     public verifyToken({
         requestBody,
-        lang,
+        locale,
     }: {
         requestBody: VerifyToken,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<boolean> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/api/v1/auth/verify-token/',
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             body: requestBody,
             mediaType: 'application/json',
@@ -137,15 +138,15 @@ export class AccountService {
      * @throws ApiError
      */
     public authSessions({
-        lang,
+        locale,
     }: {
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<Array<UserSessionVisible>> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/api/v1/auth/sessions/',
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             errors: {
                 400: `Bad Request`,
@@ -159,15 +160,15 @@ export class AccountService {
      * @throws ApiError
      */
     public authSessionRevokeAll({
-        lang,
+        locale,
     }: {
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<IResponseBase_str_> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/api/v1/auth/sessions/revoke-all/',
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             errors: {
                 400: `Bad Request`,
@@ -182,10 +183,10 @@ export class AccountService {
      */
     public authSessionRevoke({
         objId,
-        lang,
+        locale,
     }: {
         objId: string,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<IResponseBase_UserSessionVisible_> {
         return this.httpRequest.request({
             method: 'GET',
@@ -194,7 +195,7 @@ export class AccountService {
                 'obj_id': objId,
             },
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             errors: {
                 400: `Bad Request`,
@@ -208,15 +209,15 @@ export class AccountService {
      * @throws ApiError
      */
     public me({
-        lang,
+        locale,
     }: {
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<UserVisible> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/api/v1/auth/me/',
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             errors: {
                 400: `Bad Request`,
@@ -231,16 +232,16 @@ export class AccountService {
      */
     public signUp({
         requestBody,
-        lang,
+        locale,
     }: {
         requestBody: SignUpIn,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<IResponseBase_SignUpResult_> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/api/v1/auth/sign-up/',
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             body: requestBody,
             mediaType: 'application/json',
@@ -260,13 +261,13 @@ export class AccountService {
         scope,
         authuser,
         prompt,
-        lang,
+        locale,
     }: {
         code: string,
         scope: string,
         authuser: string,
         prompt: string,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<IResponseBase_Token_> {
         return this.httpRequest.request({
             method: 'GET',
@@ -276,7 +277,7 @@ export class AccountService {
                 'scope': scope,
                 'authuser': authuser,
                 'prompt': prompt,
-                'lang': lang,
+                'locale': locale,
             },
             errors: {
                 400: `Bad Request`,
@@ -290,15 +291,15 @@ export class AccountService {
      * @throws ApiError
      */
     public authPhoneVerifySend({
-        lang,
+        locale,
     }: {
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<IResponseBase_PhoneVerify_> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/api/v1/auth/phone/verify/send/',
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             errors: {
                 400: `Bad Request`,
@@ -313,17 +314,17 @@ export class AccountService {
      */
     public authPhoneVerify({
         code,
-        lang,
+        locale,
     }: {
         code: string,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<IResponseBase_UserVisible_> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/api/v1/auth/phone/verify/confirm/',
             query: {
                 'code': code,
-                'lang': lang,
+                'locale': locale,
             },
             errors: {
                 400: `Bad Request`,
@@ -337,15 +338,15 @@ export class AccountService {
      * @throws ApiError
      */
     public authEmailVerifySend({
-        lang,
+        locale,
     }: {
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<IResponseBase_str_> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/api/v1/auth/email/verify/send/',
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             errors: {
                 400: `Bad Request`,
@@ -360,17 +361,17 @@ export class AccountService {
      */
     public authEmailVerify({
         code,
-        lang,
+        locale,
     }: {
         code: string,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<IResponseBase_UserVisible_> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/api/v1/auth/email/verify/confirm/',
             query: {
                 'code': code,
-                'lang': lang,
+                'locale': locale,
             },
             errors: {
                 400: `Bad Request`,
@@ -387,14 +388,14 @@ export class AccountService {
         userId,
         search,
         orderBy,
-        lang,
+        locale,
         page,
         limit,
     }: {
         userId?: (string | null),
         search?: (string | null),
         orderBy?: ('created_at' | '-created_at' | null),
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
         page?: (number | null),
         limit?: (number | null),
     }): CancelablePromise<IPaginationDataBase_UserVisible_> {
@@ -405,7 +406,7 @@ export class AccountService {
                 'user_id': userId,
                 'search': search,
                 'order_by': orderBy,
-                'lang': lang,
+                'locale': locale,
                 'page': page,
                 'limit': limit,
             },
@@ -421,15 +422,15 @@ export class AccountService {
      * @throws ApiError
      */
     public userCount({
-        lang,
+        locale,
     }: {
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<number> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/api/v1/user/count/',
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             errors: {
                 400: `Bad Request`,
@@ -444,16 +445,16 @@ export class AccountService {
      */
     public userCreate({
         requestBody,
-        lang,
+        locale,
     }: {
         requestBody: UserCreate,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<IResponseBase_UserVisible_> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/api/v1/user/create/',
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             body: requestBody,
             mediaType: 'application/json',
@@ -470,10 +471,10 @@ export class AccountService {
      */
     public userDetail({
         objId,
-        lang,
+        locale,
     }: {
         objId: string,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<UserVisible> {
         return this.httpRequest.request({
             method: 'GET',
@@ -482,7 +483,7 @@ export class AccountService {
                 'obj_id': objId,
             },
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             errors: {
                 400: `Bad Request`,
@@ -498,11 +499,11 @@ export class AccountService {
     public userUpdate({
         objId,
         requestBody,
-        lang,
+        locale,
     }: {
         objId: string,
         requestBody: UserBase,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<IResponseBase_UserVisible_> {
         return this.httpRequest.request({
             method: 'PATCH',
@@ -511,7 +512,7 @@ export class AccountService {
                 'obj_id': objId,
             },
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             body: requestBody,
             mediaType: 'application/json',
@@ -528,10 +529,10 @@ export class AccountService {
      */
     public userDelete({
         objId,
-        lang,
+        locale,
     }: {
         objId: string,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<void> {
         return this.httpRequest.request({
             method: 'DELETE',
@@ -540,7 +541,7 @@ export class AccountService {
                 'obj_id': objId,
             },
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             errors: {
                 400: `Bad Request`,
@@ -555,17 +556,17 @@ export class AccountService {
      */
     public userPhoneVerifyManual({
         objId,
-        lang,
+        locale,
     }: {
         objId: string,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<IResponseBase_UserVisible_> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/api/v1/user/phone/verify/manual/',
             query: {
                 'obj_id': objId,
-                'lang': lang,
+                'locale': locale,
             },
             errors: {
                 400: `Bad Request`,
@@ -580,17 +581,17 @@ export class AccountService {
      */
     public userPhoneVerifyGetCode({
         phone,
-        lang,
+        locale,
     }: {
         phone: string,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<IResponseBase_str_> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/api/v1/user/phone/verify/get-code/',
             query: {
                 'phone': phone,
-                'lang': lang,
+                'locale': locale,
             },
             errors: {
                 400: `Bad Request`,
@@ -605,19 +606,45 @@ export class AccountService {
      */
     public userProfileUpdate({
         formData,
-        lang,
+        locale,
     }: {
         formData: Body_user_profile_update,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<IResponseBase_UserVisible_> {
         return this.httpRequest.request({
             method: 'PATCH',
             url: '/api/v1/profile/update/',
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             formData: formData,
             mediaType: 'application/x-www-form-urlencoded',
+            errors: {
+                400: `Bad Request`,
+                422: `Validation Error`,
+            },
+        });
+    }
+    /**
+     * Staff-Change-Password
+     * @returns IResponseBase_str_ Successful Response
+     * @throws ApiError
+     */
+    public staffChangePassword({
+        requestBody,
+        locale,
+    }: {
+        requestBody: PasswordIn,
+        locale?: (LanguagesChoices | null),
+    }): CancelablePromise<IResponseBase_str_> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/api/v1/staff/change-password/',
+            query: {
+                'locale': locale,
+            },
+            body: requestBody,
+            mediaType: 'application/json',
             errors: {
                 400: `Bad Request`,
                 422: `Validation Error`,
@@ -631,16 +658,16 @@ export class AccountService {
      */
     public userProfileChangePassword({
         requestBody,
-        lang,
+        locale,
     }: {
         requestBody: ProfilePasswordIn,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<IResponseBase_str_> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/api/v1/profile/change-password/',
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             body: requestBody,
             mediaType: 'application/json',
@@ -656,15 +683,15 @@ export class AccountService {
      * @throws ApiError
      */
     public userProfileChangePasswordCode({
-        lang,
+        locale,
     }: {
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<IResponseBase_str_> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/api/v1/profile/change-password/code/',
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             errors: {
                 400: `Bad Request`,
@@ -679,16 +706,16 @@ export class AccountService {
      */
     public userProfileSetEmail({
         formData,
-        lang,
+        locale,
     }: {
         formData: Body_user_profile_set_email,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<IResponseBase_UserVisible_> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/api/v1/profile/set-email/',
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             formData: formData,
             mediaType: 'application/x-www-form-urlencoded',
@@ -705,16 +732,16 @@ export class AccountService {
      */
     public userProfileChangeEmail({
         requestBody,
-        lang,
+        locale,
     }: {
         requestBody: ProfileChangeEmail,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<IResponseBase_str_> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/api/v1/profile/change-email/',
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             body: requestBody,
             mediaType: 'application/json',
@@ -731,16 +758,16 @@ export class AccountService {
      */
     public userProfileForgotPassword({
         formData,
-        lang,
+        locale,
     }: {
         formData: Body_user_profile_forgot_password,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<IResponseBase_str_> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/api/v1/profile/forgot-password/',
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             formData: formData,
             mediaType: 'application/x-www-form-urlencoded',
@@ -757,16 +784,16 @@ export class AccountService {
      */
     public userProfileResetPassword({
         requestBody,
-        lang,
+        locale,
     }: {
         requestBody: ResetPassword,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<IResponseBase_str_> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/api/v1/profile/reset-password/',
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             body: requestBody,
             mediaType: 'application/json',

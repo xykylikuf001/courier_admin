@@ -3,7 +3,5 @@
 /* tslint:disable */
 /* eslint-disable */
 export enum ContentTypeChoices {
-    GALLERY = 'gallery',
-    PAYMENT = 'payment',
-    USER = 'user',
+    SLIDER = 'slider',
 }

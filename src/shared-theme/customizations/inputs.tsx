@@ -276,8 +276,8 @@ export const inputsCustomizations: Components<Theme> = {
                             size: 'small',
                         },
                         style: {
-                            width: '2.25rem',
-                            height: '2.25rem',
+                            width: '1.5rem',
+                            height: '1.5rem',
                             padding: '0.25rem',
                             [`& .${svgIconClasses.root}`]: { fontSize: '1rem' },
                         },
@@ -287,8 +287,10 @@ export const inputsCustomizations: Components<Theme> = {
                             size: 'medium',
                         },
                         style: {
-                            width: '2.5rem',
-                            height: '2.5rem',
+                            width: '2.25rem',
+                            height: '2.25rem',
+                            padding: '0.25rem',
+                            [`& .${svgIconClasses.root}`]: { fontSize: '1rem' },
                         },
                     },
                 ],

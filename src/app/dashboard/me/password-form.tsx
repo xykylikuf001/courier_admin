@@ -5,7 +5,7 @@ import {z} from "zod";
 import {useRouter} from "next/navigation";
 
 import FormConstructor, {BaseFormInputProps} from "@/components/forms/FormConstructor";
-import type {ProfilePasswordIn, ValidationError} from "@/openapi/client";
+import type {PasswordIn, ValidationError} from "@/openapi/client";
 
 import {changePassword} from "./actions";
 
@@ -17,7 +17,7 @@ const PasswordForm = () => {
         errors,
         setErrors
     ] = useState<ValidationError[] | null>(null)
-    const handleSubmit = async (values: ProfilePasswordIn, callback: (props: {
+    const handleSubmit = async (values: PasswordIn, callback: (props: {
         isError: boolean,
         message?: string | null
     }) => Promise<void>) => {
@@ -80,13 +80,12 @@ const PasswordForm = () => {
             oldPassword: z.string({required_error: "This field is required"}),
             password: z.string({required_error: "This field is required"}),
             passwordConfirm: z.string({required_error: "This field is required"}),
-
         }
     )
 
 
     return (
-        <FormConstructor<ProfilePasswordIn>
+        <FormConstructor<PasswordIn>
             onSubmit={handleSubmit}
             title="Change my password"
             initialValues={initialValues}

@@ -6,7 +6,6 @@ import Typography from "@mui/material/Typography";
 
 import {OrderVisible} from "@/openapi/client";
 import {formatDatetime} from "@/lib/helper";
-import ActionsMenu from "@/components/features/menu/ActionsMenu";
 import ServerSideDataGrid from "@/components/table/ServerSideDataGrid";
 import ViewButton from "@/components/ui/buttons/ViewButton";
 
@@ -19,10 +18,6 @@ interface Props {
 
 
 export default function Content({rows, limit, page}: Props) {
-
-
-
-
     const columns: GridColDef[] = [
         {
             field: 'code',
@@ -66,9 +61,7 @@ export default function Content({rows, limit, page}: Props) {
             width: 100,
             renderCell: (params) => {
                 return (
-                    <ActionsMenu isMiniButton>
-                        <ViewButton href={`/dashboard/order/${params.row.id}/detail`}/>
-                    </ActionsMenu>
+                    <ViewButton type="iconButton" href={`/dashboard/order/${params.row.id}/detail`}/>
                 )
             },
             sortable: false,
@@ -81,12 +74,11 @@ export default function Content({rows, limit, page}: Props) {
     return (
         <Fragment>
             <Typography component="h2" variant="h6" sx={{mb: 2}}>
-                Overview
+                Orders
             </Typography>
 
             <ServerSideDataGrid
-                page={page} pageSize={limit}
-                title={"Orders"}  columns={columns} rows={rows}/>
+                page={page} pageSize={limit} columns={columns} rows={rows}/>
         </Fragment>
     )
 }

@@ -17,7 +17,7 @@ const PasswordField = (props: TextFieldProps) => {
                        input: {
                            endAdornment: (
                                <InputAdornment position="end">
-                                   <IconButton className="select-none hover:text-blue-600 outline-none"
+                                   <IconButton className="tw-select-none hover:tw-text-blue-600 tw-outline-none"
                                                sx={{border: "none", outline: "none"}}
                                                onClick={() => setShowPass(!showPass)}>
                                        {showPass ? <MdVisibility/> : <MdVisibilityOff/>}

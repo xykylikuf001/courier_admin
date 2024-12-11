@@ -18,6 +18,7 @@ import Form from "./form";
 import {confirmPhone, getPhoneOtp} from "./actions";
 import {useState} from "react";
 import UserSessions from "./user-session";
+import TrueFalseCheck from "@/components/features/TrueFalseCheck";
 
 interface Props {
     data: UserVisible;
@@ -75,7 +76,7 @@ const Content = ({data}: Props) => {
     const action = (
         <Stack direction={"row"} spacing={0.1} alignItems="center">
             <RefreshButton onClick={() => router.refresh()}/>
-            <ActionsMenu isMiniButton={true}>
+            <ActionsMenu>
                 {data.phoneVerifiedAt == null && <ReUsableButton
                     confirmText={"Are you sure?!"}
                     title="Confirm phone"
@@ -157,6 +158,17 @@ const Content = ({data}: Props) => {
                     </TableCell>
                     <TableCell>
                         {data.userType.label}
+                    </TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell component="th" scope="row">
+                        Is active
+                    </TableCell>
+                    <TableCell>
+                        <TrueFalseCheck
+                            label={data.isActive ? "Yes" : "No"} isTrue={data.isActive}
+                            falseMessage={"No"}
+                            trueMessage={"Yes"}/>
                     </TableCell>
                 </TableRow>
                 <TableRow>
