@@ -13,15 +13,15 @@ export class FaviconService {
      * @throws ApiError
      */
     public favicon({
-        lang,
+        locale,
     }: {
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<any> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/favicon.ico',
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             errors: {
                 400: `Bad Request`,

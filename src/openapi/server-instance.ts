@@ -68,7 +68,6 @@ export async function callRequest<T, Y>(
     } catch (e) {
         error = e
     }
-    console.log(typeof error, error)
     if (error instanceof ApiError) {
 
         if (callbacks && callbacks[error.status]) {

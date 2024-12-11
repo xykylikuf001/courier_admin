@@ -2,6 +2,7 @@
 import React from "react";
 
 import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 import SideMenu from "@/components/layout/modern/SideMenu";
 import AppNavbar from "@/components/layout/modern/AppNavbar";
 import {alpha} from "@mui/material/styles";
@@ -18,28 +19,34 @@ const ModernLayout = ({children}: { children: React.ReactNode }) => {
             <Box
                 component="main"
                 sx={(theme) => ({
-                    flexGrow: 1,
+                    width: "100%",
                     backgroundColor: alpha(theme.palette.background.default, 1),
                     overflow: 'auto',
                 })}
             >
-                <Box
-                    // spacing={2}
+
+                <Stack
+                    spacing={2}
                     sx={{
-                    //     alignItems: 'center',
+                        alignItems: 'center',
                         mx: 3,
-                    //     pb: 5,
-                        mt: {xs: 8, md: 0},
+                        pb: 5,
+                        mt: { xs: 8, md: 0 },
                     }}
                 >
                     <Header/>
                     {/*<MainGrid/>*/}
 
-                    <Box sx={{width: '100%', py: 5, maxWidth: {sm: '100%', md: '1700px'}}}>
+                    <Box sx={{
+                        width: '100%',
+                        my: 5,
+                        maxWidth: {sm: '100%', md: '1700px'}
+                        }}
+                    >
                         {children}
                     </Box>
 
-                </Box>
+                </Stack>
             </Box>
         </Box>
     )

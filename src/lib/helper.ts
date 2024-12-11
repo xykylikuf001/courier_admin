@@ -4,8 +4,8 @@ import {format, parseISO} from "date-fns";
 
 import type {FormikProps} from "formik";
 
-import {ValidationError} from "@/openapi/client";
-// import {DEFAULT_LOCALE} from "@/lib/constants";
+import {LanguagesChoices, ValidationError} from "@/openapi/client";
+import {DEFAULT_LOCALE} from "@/lib/constants";
 
 const toastOptions: ToastOptions = {
     // autoClose: 5000,
@@ -220,4 +220,16 @@ export function displayCurrency(props?: { amount: number | string | null, curren
     const amount = typeof props.amount === 'string' ? parseFloat(props.amount) : props.amount;
     if (isNaN(amount)) return '';
     return new Intl.NumberFormat('ru-RU', {style: 'currency', currency: props.currency}).format(props.amount as number)
+}
+
+
+export function getSearchParamsLang(searchParams: { lang?: string | null }) {
+    if (typeof searchParams.lang === "string") {
+        const lang = getValueFromEnum(LanguagesChoices, searchParams.lang)
+        if (lang) {
+            return lang
+        }
+    }
+    const defaultLang = getValueFromEnum(LanguagesChoices, DEFAULT_LOCALE);
+    return defaultLang ?? LanguagesChoices.TK
 }

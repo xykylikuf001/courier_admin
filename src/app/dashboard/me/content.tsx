@@ -14,7 +14,7 @@ import Form from "./form";
 const Content = ({data, sessions}: { data: UserVisible, sessions: UserSessionVisible[] }) => {
     return (
         <div className="tw-space-y-10">
-            <DetailTable title={"User"} hasData={true}>
+            <DetailTable title={"My profile"} hasData={true}>
                 <TableRow>
                     <TableCell component="th" scope="row">
                         ID

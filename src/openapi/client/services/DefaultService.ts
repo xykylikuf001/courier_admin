@@ -13,15 +13,15 @@ export class DefaultService {
      * @throws ApiError
      */
     public root({
-        lang,
+        locale,
     }: {
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<any> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/',
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             errors: {
                 400: `Bad Request`,

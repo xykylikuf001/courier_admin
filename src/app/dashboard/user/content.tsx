@@ -8,7 +8,6 @@ import {formatDatetime} from "@/lib/helper";
 import ViewButton from "@/components/ui/buttons/ViewButton";
 import TrueFalseCheck from "@/components/features/TrueFalseCheck";
 import ServerSideDataGrid from "@/components/table/ServerSideDataGrid";
-import ActionsMenu from "@/components/features/menu/ActionsMenu";
 import AddButton from "@/components/ui/buttons/AddButton";
 
 interface Props {
@@ -19,21 +18,6 @@ interface Props {
 
 
 export default function Content({rows, limit, page}: Props) {
-    // const columns: GridColDef[] = [
-    //     { field: 'name', headerName: 'Name', width: 150 },
-    //     // { field: 'col2', headerName: 'Column 2', width: 150 },
-    // ];
-
-    // const router = useRouter();
-    // const searchParams = useSearchParams();
-    // const pathname = usePathname();
-
-    // const handleChange = async (key: string, value: any) => {
-    //     const params = new URLSearchParams(searchParams)
-    //     params.set(key, value);
-    //     router.replace(`${pathname}?${params.toString()}`);
-    // };
-
 
     const columns: GridColDef[] = [
         {
@@ -93,69 +77,33 @@ export default function Content({rows, limit, page}: Props) {
             width: 100,
             renderCell: (params) => {
                 return (
-                    <ActionsMenu isMiniButton>
-                        <ViewButton href={`/dashboard/user/${params.row.id}/detail`}/>
-                    </ActionsMenu>
+                        <ViewButton type="iconButton" href={`/dashboard/user/${params.row.id}/detail`}/>
                 )
             },
             sortable: false,
             filterable: false,
         },
-        // {
-        //     field: 'users',
-        //     headerName: 'Users',
-        //     headerAlign: 'right',
-        //     align: 'right',
-        //     flex: 1,
-        //     minWidth: 80,
-        // },
-        // {
-        //     field: 'eventCount',
-        //     headerName: 'Event Count',
-        //     headerAlign: 'right',
-        //     align: 'right',
-        //     flex: 1,
-        //     minWidth: 100,
-        // },
-        // {
-        //     field: 'viewsPerUser',
-        //     headerName: 'Views per User',
-        //     headerAlign: 'right',
-        //     align: 'right',
-        //     flex: 1,
-        //     minWidth: 120,
-        // },
-        // {
-        //     field: 'averageTime',
-        //     headerName: 'Average Time',
-        //     headerAlign: 'right',
-        //     align: 'right',
-        //     flex: 1,
-        //     minWidth: 100,
-        // },
-        // {
-        //     field: 'conversions',
-        //     headerName: 'Daily Conversions',
-        //     flex: 1,
-        //     minWidth: 150,
-        //     renderCell: renderSparklineCell,
-        // },
     ];
 
 
-    const action = (
-        <ActionsMenu isMiniButton={true}>
-            <AddButton href={"/dashboard/user/create"}/>
-        </ActionsMenu>
-    )
+    const getAction = () => {
+        return (
+            <AddButton type="iconButton" href={"/dashboard/user/create"}/>
+        )
+    };
 
     return (
         <Fragment>
             <Typography component="h2" variant="h6" sx={{mb: 2}}>
-                Overview
+                Users
             </Typography>
-            <ServerSideDataGrid page={page} pageSize={limit} title={"Users"} action={action} columns={columns}
-                                rows={rows}/>
+            <ServerSideDataGrid
+                page={page}
+                pageSize={limit}
+                getAction={getAction}
+                columns={columns}
+                rows={rows}
+            />
         </Fragment>
     )
 }

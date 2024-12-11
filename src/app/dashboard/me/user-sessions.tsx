@@ -1,6 +1,5 @@
 "use client"
 import PersonOffIcon from '@mui/icons-material/PersonOff';
-import ActionsMenu from "@/components/features/menu/ActionsMenu";
 import EnhancedTable from "@/components/table/EnhancedTable";
 import {UserSessionVisible} from "@/openapi/client";
 import { formatDatetime} from "@/lib/helper";
@@ -74,26 +73,24 @@ export default function UserSessions({data}: Props) {
                     }
                 }
                 return (
-                    <ActionsMenu>
                         <ReUsableButton
+
                             confirmText={"Are you sure?!"}
                             title="Revoke"
-                            type="menuItem"
+                            type="iconButton"
                             icon={<PersonOffIcon/>} onClick={handleRevoke}/>
-                    </ActionsMenu>
                 )
             },
         },
     ]
 
     const action = (
-        <ActionsMenu isMiniButton={true}>
             <ReUsableButton
+
                 confirmText={"Are you sure?!"}
                 title="Revoke all"
-                type="menuItem"
+                type="iconButton"
                 icon={<PersonOffIcon/>} onClick={handleRevokeAll}/>
-        </ActionsMenu>
     )
 
     return (

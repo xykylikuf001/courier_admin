@@ -20,7 +20,7 @@ export default async function Await<T>(
         } else{
 
             return (
-                <div className="h-full w-full flex items-center justify-center">
+                <div className="tw-h-full tw-w-full tw-flex tw-items-center tw-justify-center">
                     <div>Error handler - Await component</div>
                 </div>
             )

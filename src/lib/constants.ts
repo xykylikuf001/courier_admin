@@ -32,7 +32,7 @@ export const WEBAPP_URL =
     "http://localhost:3000"
 export const WEBSITE_URL = process.env.NEXT_PUBLIC_WEBSITE_URL || "http://localhost:3000"
 
-export const DEFAULT_LOCALE = "ru";
+export const DEFAULT_LOCALE = "tk";
 
 // NEXT CACHING DEFAULTS
 export const MD_DELAY = 0; // revalidate at every 1 day

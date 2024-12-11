@@ -20,12 +20,12 @@ export class OrderService {
      */
     public orderList({
         orderBy,
-        lang,
+        locale,
         page,
         limit,
     }: {
         orderBy?: ('created_at' | '-created_at' | null),
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
         page?: (number | null),
         limit?: (number | null),
     }): CancelablePromise<IPaginationDataBase_OrderVisible_> {
@@ -34,7 +34,7 @@ export class OrderService {
             url: '/api/v1/order/',
             query: {
                 'order_by': orderBy,
-                'lang': lang,
+                'locale': locale,
                 'page': page,
                 'limit': limit,
             },
@@ -50,15 +50,15 @@ export class OrderService {
      * @throws ApiError
      */
     public orderCount({
-        lang,
+        locale,
     }: {
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<number> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/api/v1/order/count/',
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             errors: {
                 400: `Bad Request`,
@@ -73,10 +73,10 @@ export class OrderService {
      */
     public orderDetail({
         objId,
-        lang,
+        locale,
     }: {
         objId: string,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<OrderVisible> {
         return this.httpRequest.request({
             method: 'GET',
@@ -85,7 +85,7 @@ export class OrderService {
                 'obj_id': objId,
             },
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             errors: {
                 400: `Bad Request`,
@@ -101,11 +101,11 @@ export class OrderService {
     public orderUpdate({
         objId,
         requestBody,
-        lang,
+        locale,
     }: {
         objId: string,
         requestBody: OrderBase,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<IResponseBase_OrderVisible_> {
         return this.httpRequest.request({
             method: 'POST',
@@ -114,7 +114,7 @@ export class OrderService {
                 'obj_id': objId,
             },
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             body: requestBody,
             mediaType: 'application/json',
@@ -131,10 +131,10 @@ export class OrderService {
      */
     public orderDelete({
         objId,
-        lang,
+        locale,
     }: {
         objId: string,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<IResponseBase_OrderVisible_> {
         return this.httpRequest.request({
             method: 'DELETE',
@@ -143,7 +143,7 @@ export class OrderService {
                 'obj_id': objId,
             },
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             errors: {
                 400: `Bad Request`,
@@ -158,14 +158,16 @@ export class OrderService {
      */
     public orderMyList({
         orderBy,
+        code,
         status,
-        lang,
+        locale,
         page,
         limit,
     }: {
         orderBy?: ('created_at' | '-created_at' | null),
+        code?: (string | null),
         status?: (OrderStatusChoices | null),
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
         page?: (number | null),
         limit?: (number | null),
     }): CancelablePromise<IPaginationDataBase_OrderVisible_> {
@@ -174,8 +176,9 @@ export class OrderService {
             url: '/api/v1/order/my/list/',
             query: {
                 'order_by': orderBy,
+                'code': code,
                 'status': status,
-                'lang': lang,
+                'locale': locale,
                 'page': page,
                 'limit': limit,
             },
@@ -192,17 +195,17 @@ export class OrderService {
      */
     public orderMyCount({
         status,
-        lang,
+        locale,
     }: {
         status?: (OrderStatusChoices | null),
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<number> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/api/v1/order/my/count/',
             query: {
                 'status': status,
-                'lang': lang,
+                'locale': locale,
             },
             errors: {
                 400: `Bad Request`,
@@ -217,16 +220,16 @@ export class OrderService {
      */
     public orderMyCreate({
         requestBody,
-        lang,
+        locale,
     }: {
         requestBody: OrderCreate,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<IResponseBase_OrderVisible_> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/api/v1/order/my/create/',
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             body: requestBody,
             mediaType: 'application/json',
@@ -243,10 +246,10 @@ export class OrderService {
      */
     public orderMyDetail({
         objId,
-        lang,
+        locale,
     }: {
         objId: string,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<OrderVisible> {
         return this.httpRequest.request({
             method: 'GET',
@@ -255,7 +258,7 @@ export class OrderService {
                 'obj_id': objId,
             },
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             errors: {
                 400: `Bad Request`,
@@ -270,10 +273,10 @@ export class OrderService {
      */
     public orderMyCancel({
         objId,
-        lang,
+        locale,
     }: {
         objId: string,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<IResponseBase_OrderVisible_> {
         return this.httpRequest.request({
             method: 'GET',
@@ -282,7 +285,7 @@ export class OrderService {
                 'obj_id': objId,
             },
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             errors: {
                 400: `Bad Request`,

@@ -19,12 +19,12 @@ export class FileService {
      */
     public fileList({
         orderBy,
-        lang,
+        locale,
         page,
         limit,
     }: {
         orderBy?: ('id' | '-id' | null),
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
         page?: (number | null),
         limit?: (number | null),
     }): CancelablePromise<IPaginationDataBase_FileVisible_> {
@@ -33,7 +33,7 @@ export class FileService {
             url: '/api/v1/file/',
             query: {
                 'order_by': orderBy,
-                'lang': lang,
+                'locale': locale,
                 'page': page,
                 'limit': limit,
             },
@@ -50,16 +50,16 @@ export class FileService {
      */
     public fileUpload({
         formData,
-        lang,
+        locale,
     }: {
         formData: Body_file_upload,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<IResponseBase_FileVisible_> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/api/v1/file/create/upload/',
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             formData: formData,
             mediaType: 'multipart/form-data',
@@ -76,10 +76,10 @@ export class FileService {
      */
     public fileDetail({
         objId,
-        lang,
+        locale,
     }: {
         objId: number,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<FileVisible> {
         return this.httpRequest.request({
             method: 'GET',
@@ -88,7 +88,7 @@ export class FileService {
                 'obj_id': objId,
             },
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             errors: {
                 400: `Bad Request`,
@@ -104,11 +104,11 @@ export class FileService {
     public fileUpdate({
         objId,
         requestBody,
-        lang,
+        locale,
     }: {
         objId: number,
         requestBody: FileBase,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<IResponseBase_FileVisible_> {
         return this.httpRequest.request({
             method: 'PATCH',
@@ -117,7 +117,7 @@ export class FileService {
                 'obj_id': objId,
             },
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             body: requestBody,
             mediaType: 'application/json',
@@ -134,10 +134,10 @@ export class FileService {
      */
     public fileDelete({
         objId,
-        lang,
+        locale,
     }: {
         objId: number,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<void> {
         return this.httpRequest.request({
             method: 'DELETE',
@@ -146,7 +146,7 @@ export class FileService {
                 'obj_id': objId,
             },
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             errors: {
                 400: `Bad Request`,
@@ -161,12 +161,12 @@ export class FileService {
      */
     public filePublicList({
         orderBy,
-        lang,
+        locale,
         page,
         limit,
     }: {
         orderBy?: ('id' | '-id' | null),
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
         page?: (number | null),
         limit?: (number | null),
     }): CancelablePromise<IPaginationDataBase_FileVisible_> {
@@ -175,7 +175,7 @@ export class FileService {
             url: '/api/v1/file/public/',
             query: {
                 'order_by': orderBy,
-                'lang': lang,
+                'locale': locale,
                 'page': page,
                 'limit': limit,
             },

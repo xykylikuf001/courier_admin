@@ -22,37 +22,15 @@ export class ConfigService {
      * @throws ApiError
      */
     public configDetail({
-        lang,
+        locale,
     }: {
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<ConfigVisible> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/api/v1/config/',
             query: {
-                'lang': lang,
-            },
-            errors: {
-                400: `Bad Request`,
-                422: `Validation Error`,
-            },
-        });
-    }
-    /**
-     * System-Detail
-     * @returns any Successful Response
-     * @throws ApiError
-     */
-    public systemDetail({
-        lang,
-    }: {
-        lang?: (LanguagesChoices | null),
-    }): CancelablePromise<Record<string, any>> {
-        return this.httpRequest.request({
-            method: 'GET',
-            url: '/api/v1/config/system/',
-            query: {
-                'lang': lang,
+                'locale': locale,
             },
             errors: {
                 400: `Bad Request`,
@@ -67,16 +45,16 @@ export class ConfigService {
      */
     public configManage({
         requestBody,
-        lang,
+        locale,
     }: {
         requestBody: ConfigCreate,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<IResponseBase_ConfigVisible_> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/api/v1/config/manage/',
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             body: requestBody,
             mediaType: 'application/json',
@@ -93,12 +71,12 @@ export class ConfigService {
      */
     public configTrList({
         orderBy,
-        lang,
+        locale,
         page,
         limit,
     }: {
         orderBy?: ('id' | '-id' | null),
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
         page?: (number | null),
         limit?: (number | null),
     }): CancelablePromise<IPaginationDataBase_ConfigTranslationVisible_> {
@@ -107,7 +85,7 @@ export class ConfigService {
             url: '/api/v1/config/translations/',
             query: {
                 'order_by': orderBy,
-                'lang': lang,
+                'locale': locale,
                 'page': page,
                 'limit': limit,
             },
@@ -124,16 +102,16 @@ export class ConfigService {
      */
     public configTrCreate({
         requestBody,
-        lang,
+        locale,
     }: {
         requestBody: ConfigTranslationCreate,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<IResponseBase_ConfigTranslationVisible_> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/api/v1/config/translations/create/',
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             body: requestBody,
             mediaType: 'application/json',
@@ -150,19 +128,14 @@ export class ConfigService {
      */
     public configTrDetail({
         locale,
-        lang,
     }: {
-        locale: string,
-        lang?: (LanguagesChoices | null),
+        locale: (LanguagesChoices | null),
     }): CancelablePromise<ConfigTranslationVisible> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/api/v1/config/translations/{locale}/detail/',
             path: {
                 'locale': locale,
-            },
-            query: {
-                'lang': lang,
             },
             errors: {
                 400: `Bad Request`,
@@ -178,20 +151,15 @@ export class ConfigService {
     public configTrUpdate({
         locale,
         requestBody,
-        lang,
     }: {
-        locale: string,
+        locale: (LanguagesChoices | null),
         requestBody: ConfigTranslationBase,
-        lang?: (LanguagesChoices | null),
     }): CancelablePromise<IResponseBase_ConfigTranslationVisible_> {
         return this.httpRequest.request({
             method: 'PATCH',
             url: '/api/v1/config/translations/{locale}/update/',
             path: {
                 'locale': locale,
-            },
-            query: {
-                'lang': lang,
             },
             body: requestBody,
             mediaType: 'application/json',
@@ -208,19 +176,14 @@ export class ConfigService {
      */
     public configTrDelete({
         locale,
-        lang,
     }: {
-        locale: string,
-        lang?: (LanguagesChoices | null),
+        locale: (LanguagesChoices | null),
     }): CancelablePromise<IResponseBase_ConfigTranslationVisible_> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/api/v1/config/translations/{locale}/delete/',
             path: {
                 'locale': locale,
-            },
-            query: {
-                'lang': lang,
             },
             errors: {
                 400: `Bad Request`,
@@ -234,15 +197,15 @@ export class ConfigService {
      * @throws ApiError
      */
     public configPublic({
-        lang,
+        locale,
     }: {
-        lang: string,
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<ConfigVisiblePublic> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/api/v1/config/public/',
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             errors: {
                 400: `Bad Request`,

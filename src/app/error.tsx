@@ -23,7 +23,7 @@ export default function Error({reset}: Props) {
                 sx={{
                     textAlign: "center",
                     marginTop: { xs: "20%", md: "10%" },
-                    // color: "#fff",
+                    color: "#fff",
                     position: "relative",
                     zIndex: 1,
                 }}
@@ -54,7 +54,7 @@ export default function Error({reset}: Props) {
                         gutterBottom
                         sx={{
                             fontSize: {xs: "1.5rem", md: "2rem"},
-                            // color: "rgba(255, 255, 255, 0.8)",
+                            color: "rgba(255, 255, 255, 0.8)",
                         }}
                     >
                         Something Went Wrong

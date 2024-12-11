@@ -107,7 +107,10 @@ export default function Content() {
 
     return (
         <SignInContainer direction="column" justifyContent="space-between">
-            <ColorModeIconDropdown sx={{position: 'fixed', top: '1rem', right: '1rem'}}/>
+            <div className="tw-flex tw-flex-row ">
+                <div className="tw-flex-grow"/>
+                <ColorModeIconDropdown/>
+            </div>
             <Card variant="outlined">
                 <SitemarkIcon/>
                 <Typography

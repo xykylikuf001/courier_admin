@@ -14,6 +14,7 @@ import { LocationService } from './services/LocationService';
 import { MessageService } from './services/MessageService';
 import { OrderService } from './services/OrderService';
 import { ReleaseService } from './services/ReleaseService';
+import { SystemService } from './services/SystemService';
 type HttpRequestConstructor = new (config: OpenAPIConfig) => BaseHttpRequest;
 export class FetchClient {
     public readonly account: AccountService;
@@ -25,6 +26,7 @@ export class FetchClient {
     public readonly message: MessageService;
     public readonly order: OrderService;
     public readonly release: ReleaseService;
+    public readonly system: SystemService;
     public readonly request: BaseHttpRequest;
     constructor(config?: Partial<OpenAPIConfig>, HttpRequest: HttpRequestConstructor = FetchHttpRequest) {
         this.request = new HttpRequest({
@@ -49,6 +51,7 @@ export class FetchClient {
         this.message = new MessageService(this.request);
         this.order = new OrderService(this.request);
         this.release = new ReleaseService(this.request);
+        this.system = new SystemService(this.request);
     }
 }
 

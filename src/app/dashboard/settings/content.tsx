@@ -43,21 +43,21 @@ export default function Content() {
                     </Card>
                     </Link>
                 </Grid>
-                {/*<Grid size={4}>*/}
-                {/*    <Link href={"/dashboard/plugins"}>*/}
+                <Grid size={4}>
+                    <Link href={"/dashboard/place"}>
 
-                {/*        <Card sx={{ minWidth: 300 }} >*/}
-                {/*            <CardContent>*/}
-                {/*                <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }}>*/}
-                {/*                    Plugins*/}
-                {/*                </Typography>*/}
-                {/*                <Typography variant="body2">*/}
-                {/*                    View and update your plugins and their settings.*/}
-                {/*                </Typography>*/}
-                {/*            </CardContent>*/}
-                {/*        </Card>*/}
-                {/*    </Link>*/}
-                {/*</Grid>*/}
+                        <Card sx={{ minWidth: 300 }} >
+                            <CardContent>
+                                <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }}>
+                                    Places
+                                </Typography>
+                                <Typography variant="body2">
+                                    View and update your location places.
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                    </Link>
+                </Grid>
             </Grid>
         </Box>
         </Container>

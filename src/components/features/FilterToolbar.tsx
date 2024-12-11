@@ -18,8 +18,12 @@ const FilterToolbar = (
     }: { children: ReactNode, handleClick?: () => void, handleClear?: () => void }) => {
 
     return (
-        <Box sx={{width: '100%'}}>
-            <Paper component={'div'} sx={{width: '100%', mb: 2}}>
+        <Box
+            sx={{width: '100%'}}
+        >
+            <Paper component={'div'}
+                   sx={{width: '100%', mb: 2}}
+            >
                 <Card sx={{minWidth: 275}}>
                     <CardHeader title="Filter"/>
                     <CardContent>

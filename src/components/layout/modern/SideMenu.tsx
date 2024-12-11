@@ -11,7 +11,8 @@ import Typography from '@mui/material/Typography';
 // import SelectContent from './SelectContent';
 import MenuContent from './MenuContent';
 // import CardAlert from './CardAlert';
-import OptionsMenu from './OptionsMenu';
+// import OptionsMenu from './OptionsMenu';
+import UserButton from "./user-button";
 import {useAuthContext} from "@/lib/auth/provider";
 
 const drawerWidth = 240;
@@ -69,7 +70,7 @@ export default function SideMenu() {
             >
                 <Avatar
                     sizes="small"
-                    alt="Riley Carter"
+                    alt=""
                     sx={{width: 36, height: 36}}
                 />
                 <Box sx={{mr: 'auto'}}>
@@ -80,7 +81,7 @@ export default function SideMenu() {
                         {user?.email}
                     </Typography>
                 </Box>
-                <OptionsMenu/>
+                <UserButton placement="top"/>
             </Stack>
         </Drawer>
     );

@@ -6,8 +6,10 @@ export type UserSessionVisible = {
     id: string;
     userId: string;
     revokedAt?: (string | null);
+    expireAt?: (string | null);
     userAgent?: (string | null);
     ipAddress?: (string | null);
     createdAt: string;
+    firebaseDeviceId?: (string | null);
 };
 

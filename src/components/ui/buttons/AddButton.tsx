@@ -3,11 +3,9 @@ import React from "react";
 import {MdAdd} from "react-icons/md";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
-import MenuItem from "@mui/material/MenuItem";
 
-import Link from '@/components/Link';
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
+import Link, {NextLinkComposed} from '@/components/Link';
+import {MenuItem} from "@/components/features/menu/Menu";
 
 const AddButton = (
     {href, type="menuItem"}: {
@@ -17,8 +15,8 @@ const AddButton = (
     if (type==="iconButton"){
         return (
             <Tooltip title='Add' placement="top">
-                <Link href={href}>
-                    <IconButton aria-label="add">
+                <Link noLinkStyle href={href}>
+                    <IconButton size="small" aria-label="add">
                         <MdAdd/>
                     </IconButton>
                 </Link>
@@ -26,14 +24,16 @@ const AddButton = (
         )
     }
     return (
-        <Link noLinkStyle href={href}>
-            <MenuItem disableRipple>
-                <ListItemIcon>
-                    <MdAdd className="text-xl inline-block"/>
-                </ListItemIcon>
-                <ListItemText className="text-base">Add</ListItemText>
-            </MenuItem>
-        </Link>
+        <MenuItem label="Add" component={NextLinkComposed} to={href}/>
+
+        // <Link noLinkStyle href={href}>
+        //     <MenuItem disableRipple>
+        //         <ListItemIcon>
+        //             <MdAdd className="text-xl inline-block"/>
+        //         </ListItemIcon>
+        //         <ListItemText className="text-base">Add</ListItemText>
+        //     </MenuItem>
+        // </Link>
     )
 }
 

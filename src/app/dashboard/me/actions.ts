@@ -1,7 +1,7 @@
 'use server'
 
 import getServerInstance from "@/openapi/server-instance";
-import {ApiError, ProfilePasswordIn} from "@/openapi/client";
+import {ApiError, PasswordIn} from "@/openapi/client";
 
 
 import {revalidateTag} from 'next/cache'
@@ -41,7 +41,7 @@ export async function edit(values: {
 }
 
 
-export async function changePassword(values: ProfilePasswordIn) {
+export async function changePassword(values: PasswordIn) {
     const isAuth = await checkAuthCookies();
     if (!isAuth) {
         throw new AuthError("You must be signed in to perform this action!");
@@ -49,7 +49,7 @@ export async function changePassword(values: ProfilePasswordIn) {
     const fetchClient = await getServerInstance();
     let result;
     try {
-        const response = await fetchClient.account.userProfileChangePassword(
+        const response = await fetchClient.account.staffChangePassword(
             {requestBody: values}
         )
         result = {status: 200, message: response.message, data: response.data, errors: null}

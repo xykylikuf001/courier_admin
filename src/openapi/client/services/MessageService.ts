@@ -20,14 +20,14 @@ export class MessageService {
         search,
         isRead,
         orderBy,
-        lang,
+        locale,
         page,
         limit,
     }: {
         search?: (string | null),
         isRead?: (boolean | null),
         orderBy?: ('id' | '-id' | null),
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
         page?: (number | null),
         limit?: (number | null),
     }): CancelablePromise<IPaginationDataBase_MessageVisible_> {
@@ -38,7 +38,7 @@ export class MessageService {
                 'search': search,
                 'is_read': isRead,
                 'order_by': orderBy,
-                'lang': lang,
+                'locale': locale,
                 'page': page,
                 'limit': limit,
             },
@@ -55,10 +55,10 @@ export class MessageService {
      */
     public messageDetail({
         objId,
-        lang,
+        locale,
     }: {
         objId: number,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<MessageVisible> {
         return this.httpRequest.request({
             method: 'GET',
@@ -67,7 +67,7 @@ export class MessageService {
                 'obj_id': objId,
             },
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             errors: {
                 400: `Bad Request`,
@@ -82,16 +82,16 @@ export class MessageService {
      */
     public messageContactUs({
         requestBody,
-        lang,
+        locale,
     }: {
         requestBody: MessageCreate,
-        lang?: (LanguagesChoices | null),
+        locale?: (LanguagesChoices | null),
     }): CancelablePromise<IResponseBase_MessageVisible_> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/api/v1/message/contact-us/',
             query: {
-                'lang': lang,
+                'locale': locale,
             },
             body: requestBody,
             mediaType: 'application/json',

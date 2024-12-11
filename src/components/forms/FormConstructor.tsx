@@ -132,6 +132,7 @@ function FormInput<InputType extends BaseFormInputTypes>(
                          error={checkError(formik, errors, input.name)}>
                 <InputLabel id={input.id} required={props?.required ?? false}>{input.label}</InputLabel>
                 <Select
+                    variant="outlined"
                     {...props}
                     labelId={input.id}
                     id={input.id}
